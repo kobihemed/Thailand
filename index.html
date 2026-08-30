@@ -870,7 +870,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-slate-900 text-base">מרכז מסמכים (מסונכרן עם Google Drive)</h4>
-                                <p class="text-xs text-slate-500">שמירה, צפייה, שינוי שם והורדה לפי הרשאות פרופיל</p>
+                                <p class="text-xs text-slate-500">שמירה, צפייה, שינוי שם ומחיקה לפי הרשאות פרופיל</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2 self-start sm:self-auto">
@@ -889,7 +889,7 @@
                             <h5 class="font-bold text-slate-800 text-sm cursor-pointer" onclick="document.getElementById('file-input').click()">לחצו לבחירת מסמך או גררו קבצים לכאן</h5>
                             <p class="text-[11px] text-slate-500 mt-0.5">תומך ב-PDF, תמונות דרכון (JPG/PNG), שוברים וכו'</p>
                             
-                            <!-- Profile Target Selection for Upload (Triggers PIN check on change) -->
+                            <!-- Profile Target Selection for Upload -->
                             <div class="mt-3 flex items-center gap-2 text-xs">
                                 <span class="text-slate-500 font-semibold">שייך קובץ ל:</span>
                                 <select id="upload-target-profile" onchange="checkUploadPermission(this)" class="bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-bold text-slate-700 focus:outline-none focus:border-primary">
@@ -912,7 +912,7 @@
                                     <div class="p-2 text-slate-400 text-center text-xs">טוען קבצים מהדרייב...</div>
                                 </div>
                             </div>
-                            <span class="text-[10px] text-slate-400">👁️ צפייה | ✏️ שינוי שם | ⬇️ הורדה</span>
+                            <span class="text-[10px] text-slate-400">👁️ צפייה | ✏️ שינוי שם | 🗑️ מחיקה | ⬇️ הורדה</span>
                         </div>
                     </div>
                 </div>
@@ -1273,6 +1273,32 @@
         </div>
     </div>
 
+    <!-- Delete PIN Verification Modal -->
+    <div id="delete-pin-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-right shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                <h4 class="text-base font-bold text-slate-900 flex items-center gap-2 text-rose-600">
+                    <i class="fa-solid fa-trash-can"></i> אישור מחיקת קובץ
+                </h4>
+                <button onclick="closeDeleteModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-slate-600" id="delete-modal-text">
+                הזן קוד PIN של פרופיל המנהל או של בעל הקובץ כדי לאשר את המחיקה:
+            </p>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">קוד PIN:</label>
+                    <input type="password" id="delete-pin-input" placeholder="הזן קוד..." maxlength="6" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-center text-sm font-mono tracking-widest focus:outline-none focus:border-primary">
+                </div>
+                <div id="delete-pin-error" class="text-rose-500 font-bold text-[11px] hidden text-center">קוד PIN שגוי!</div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeDeleteModal()" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">ביטול</button>
+                <button onclick="confirmDeleteFile()" class="px-4 py-2 text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 rounded-xl transition">מחק לצמיתות</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal for In-App File Preview -->
     <div id="preview-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden">
         <div class="bg-white rounded-3xl max-w-4xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl">
@@ -1296,9 +1322,9 @@
     <!-- JavaScript Logic -->
     <script>
         // ==========================================
-        // כתובת ה-GOOGLE APPS SCRIPT
+        // כתובת ה-GOOGLE APPS SCRIPT מוטמעת קשיח כאן
         // ==========================================
-        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRWbc06NqD2aKxVXQU58CzFe27qi4-iSZFFTuGjzqM3yfh_ddmxHhXFjEXrCyivXnm/exec";
+        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUxleUr9vibIv1iy1fn4QNw-lx-T9RLtlOQsUsFLV_iF0rBknrzggYHv4RM4k611g/exec";
 
         // ==========================================
         // הגדרת פרופילים וקודי PIN
@@ -1311,10 +1337,12 @@
             ADMIN: { name: "מנהל (הכל)", pin: "9999", code: "ADMIN" }
         };
 
-        // ברירת מחדל מתחילה במצב GENERAL (כללי)
+        // התחלה בברירת מחדל במצב כללי
         let currentProfile = localStorage.getItem('thailand_active_profile') || 'GENERAL';
         let pendingFilesToUpload = null;
         let pendingUploadTarget = null;
+        let fileIdToDelete = null;
+        let fileTagToDelete = null;
 
         function updateProfileUI() {
             const prof = PROFILES[currentProfile] || PROFILES.GENERAL;
@@ -1373,10 +1401,9 @@
         function checkUploadPermission(selectElement) {
             const target = selectElement.value;
             if (target === 'GENERAL') {
-                return; // לא דורש סיסמה
+                return; 
             }
 
-            // נבקש קוד PIN עבור המשפחה הנבחרת
             pendingUploadTarget = target;
             document.getElementById('upload-pin-input').value = '';
             document.getElementById('upload-pin-error').classList.add('hidden');
@@ -1396,7 +1423,6 @@
 
             if (prof && prof.pin === entered) {
                 document.getElementById('upload-pin-modal').classList.add('hidden');
-                // אם היו קבצים ממתינים להעלאה
                 if (pendingFilesToUpload) {
                     executeUploadFiles(pendingFilesToUpload, pendingUploadTarget);
                     pendingFilesToUpload = null;
@@ -1404,6 +1430,67 @@
             } else {
                 document.getElementById('upload-pin-error').classList.remove('hidden');
             }
+        }
+
+        // --- Delete File Logic ---
+        function promptDeleteFile(fileId, fileName) {
+            fileIdToDelete = fileId;
+            const match = fileName.match(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]/);
+            fileTagToDelete = match ? match[1] : 'GENERAL';
+
+            document.getElementById('delete-pin-input').value = '';
+            document.getElementById('delete-pin-error').classList.add('hidden');
+            document.getElementById('delete-modal-text').innerText = `למחיקת הקובץ (${fileName.replace(/^\[.*?\]\s*/, '')}) נדרש קוד PIN של מנהל או של משפחת היעד:`;
+            document.getElementById('delete-pin-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('delete-pin-modal').classList.add('hidden');
+            fileIdToDelete = null;
+            fileTagToDelete = null;
+        }
+
+        function confirmDeleteFile() {
+            const enteredPin = document.getElementById('delete-pin-input').value.trim();
+            
+            // בדיקה האם הקוד תואם למנהל או לבעל הקובץ
+            const adminPin = PROFILES.ADMIN.pin;
+            const ownerPin = PROFILES[fileTagToDelete] ? PROFILES[fileTagToDelete].pin : null;
+
+            if (enteredPin === adminPin || (ownerPin && enteredPin === ownerPin)) {
+                closeDeleteModal();
+                executeDeleteFile(fileIdToDelete);
+            } else {
+                document.getElementById('delete-pin-error').classList.remove('hidden');
+            }
+        }
+
+        function executeDeleteFile(fileId) {
+            if (!GOOGLE_DRIVE_SCRIPT_URL) return;
+
+            fetch(GOOGLE_DRIVE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'delete',
+                    fileId: fileId
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('הקובץ נמחק בהצלחה!');
+                    fetchDriveFiles();
+                } else {
+                    alert('שגיאה במחיקת הקובץ.');
+                }
+            })
+            .catch(() => {
+                // מחיקה מקומית במקרה של תקלת תקשורת
+                allDriveFiles = allDriveFiles.filter(f => f.id !== fileId);
+                localStorage.setItem('thailand_docs_vault', JSON.stringify(allDriveFiles));
+                renderFilteredDocs();
+                alert('הקובץ נמחק מקומית.');
+            });
         }
 
         // --- Quick Order Site Open & Copy Password ---
@@ -1755,13 +1842,11 @@
                 if (currentProfile === 'ADMIN') return true;
                 const name = doc.name || '';
                 
-                // במצב כללי (GENERAL) - מציג רק קבצים כלליים (או ללא תגית משפחה)
                 if (currentProfile === 'GENERAL') {
                     if (name.startsWith('[HEMED]') || name.startsWith('[MORGEN]') || name.startsWith('[GRAND]')) return false;
                     return true;
                 }
 
-                // במצב משפחה - מציג קבצים של אותה משפחה + קבצים כלליים
                 if (name.startsWith('[HEMED]') && currentProfile !== 'HEMED') return false;
                 if (name.startsWith('[MORGEN]') && currentProfile !== 'MORGEN') return false;
                 if (name.startsWith('[GRAND]') && currentProfile !== 'GRAND') return false;
@@ -1776,16 +1861,40 @@
             }
 
             listEl.innerHTML = filtered.map(doc => {
-                const cleanName = doc.name.replace(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]\s*/, '');
+                const name = doc.name || '';
+                let badgeHtml = '';
+                let tag = 'GENERAL';
+
+                if (name.startsWith('[HEMED]')) {
+                    tag = 'HEMED';
+                    badgeHtml = '<span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold ml-1">חמד</span>';
+                } else if (name.startsWith('[MORGEN]')) {
+                    tag = 'MORGEN';
+                    badgeHtml = '<span class="text-[9px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold ml-1">מורגנשטרן</span>';
+                } else if (name.startsWith('[GRAND]')) {
+                    tag = 'GRAND';
+                    badgeHtml = '<span class="text-[9px] bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded font-bold ml-1">סבא/סבתא</span>';
+                } else {
+                    badgeHtml = '<span class="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-bold ml-1">כללי</span>';
+                }
+
+                const cleanName = name.replace(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]\s*/, '');
+
                 return `
                 <div class="p-2 bg-white rounded-xl flex items-center justify-between border border-slate-200 hover:border-slate-300 transition">
-                    <span class="truncate font-medium text-slate-700 text-xs max-w-[110px] sm:max-w-[130px]" title="${doc.name}">📄 ${cleanName}</span>
-                    <div class="flex items-center gap-1">
-                        <button onclick="previewFile('${encodeURIComponent(cleanName)}', '${doc.viewUrl || doc.downloadUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition" title="צפייה במסמך">
-                            <i class="fa-solid fa-eye text-slate-600"></i>
+                    <div class="flex items-center overflow-hidden max-w-[100px] sm:max-w-[120px]">
+                        <span class="truncate font-medium text-slate-700 text-xs" title="${name}">📄 ${cleanName}</span>
+                        ${currentProfile === 'ADMIN' ? badgeHtml : ''}
+                    </div>
+                    <div class="flex items-center gap-1 flex-shrink-0">
+                        <button onclick="previewFile('${encodeURIComponent(cleanName)}', '${doc.viewUrl || doc.downloadUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition" title="צפייה">
+                            <i class="fa-solid fa-eye"></i>
                         </button>
-                        <button onclick="renameDriveFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-bold transition" title="שנה שם קובץ">
-                            <i class="fa-solid fa-pen text-amber-600"></i>
+                        <button onclick="renameDriveFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-bold transition" title="שנה שם">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button onclick="promptDeleteFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-xs font-bold transition" title="מחיקה">
+                            <i class="fa-solid fa-trash-can"></i>
                         </button>
                         <a href="${doc.downloadUrl || doc.viewUrl}" target="_blank" download="${cleanName}" class="px-2 py-1 bg-sky-50 hover:bg-sky-100 text-primary rounded-lg text-xs font-bold transition flex items-center" title="הורדה">
                             <i class="fa-solid fa-download"></i>
@@ -1799,12 +1908,12 @@
             const currentName = decodeURIComponent(encodedCurrentName);
             const cleanName = currentName.replace(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]\s*/, '');
             const tagMatch = currentName.match(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]\s*/);
-            const tag = tagMatch ? tagMatch[0] : '';
+            const tag = tagMatch ? tagMatch[0] : '[GENERAL]';
 
             const newNameOnly = prompt("הזן שם חדש לקובץ:", cleanName);
             if (!newNameOnly || newNameOnly.trim() === "" || newNameOnly === cleanName) return;
 
-            const fullNewName = tag + newNameOnly.trim();
+            const fullNewName = tag + " " + newNameOnly.trim();
 
             if (GOOGLE_DRIVE_SCRIPT_URL) {
                 fetch(GOOGLE_DRIVE_SCRIPT_URL, {
@@ -1840,7 +1949,6 @@
             if (!files.length) return;
             pendingFilesToUpload = files;
             
-            // בדיקת הרשאה לפי היעד שנבחר בהעלאה
             const targetProfile = document.getElementById('upload-target-profile').value;
             if (targetProfile !== 'GENERAL') {
                 checkUploadPermission({ value: targetProfile });
