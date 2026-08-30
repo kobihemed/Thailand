@@ -130,6 +130,37 @@
                     </div>
                 </div>
 
+                <!-- Live Weather Cards for 3 Destinations -->
+                <div class="pt-1">
+                    <div class="flex items-center justify-center gap-2 text-xs font-bold text-slate-300 mb-2">
+                        <i class="fa-solid fa-cloud-sun text-sand"></i>
+                        <span>מזג אוויר חי ביעדי הטיול (מתעדכן אוטומטית)</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto">
+                        <!-- Khao Lak Weather -->
+                        <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-2.5 sm:p-3 shadow-lg backdrop-blur-md text-center">
+                            <span class="text-[11px] font-bold text-slate-300 block">קאו לאק</span>
+                            <div class="my-1 text-lg sm:text-xl text-sand" id="weather-icon-khaolak"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                            <span class="block text-base sm:text-xl font-black text-white" id="weather-temp-khaolak">--°C</span>
+                            <span class="text-[10px] text-slate-400 block truncate" id="weather-desc-khaolak">טוען...</span>
+                        </div>
+                        <!-- Krabi Weather -->
+                        <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-2.5 sm:p-3 shadow-lg backdrop-blur-md text-center">
+                            <span class="text-[11px] font-bold text-slate-300 block">קראבי</span>
+                            <div class="my-1 text-lg sm:text-xl text-primary" id="weather-icon-krabi"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                            <span class="block text-base sm:text-xl font-black text-white" id="weather-temp-krabi">--°C</span>
+                            <span class="text-[10px] text-slate-400 block truncate" id="weather-desc-krabi">טוען...</span>
+                        </div>
+                        <!-- Phuket Weather -->
+                        <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-2.5 sm:p-3 shadow-lg backdrop-blur-md text-center">
+                            <span class="text-[11px] font-bold text-slate-300 block">פוקט</span>
+                            <div class="my-1 text-lg sm:text-xl text-emerald-400" id="weather-icon-phuket"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                            <span class="block text-base sm:text-xl font-black text-white" id="weather-temp-phuket">--°C</span>
+                            <span class="text-[10px] text-slate-400 block truncate" id="weather-desc-phuket">טוען...</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Countdown Timer -->
                 <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto pt-2">
                     <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md">
@@ -149,23 +180,13 @@
                         <span class="text-xs text-slate-300">שניות</span>
                     </div>
                 </div>
-
-                <!-- Live Info Badges -->
-                <div class="flex flex-wrap justify-center items-center gap-3 pt-4 text-xs font-medium text-slate-200">
-                    <div class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-2">
-                        <i class="fa-solid fa-cloud-sun text-sand"></i> מזג אוויר ממוצע: 29°C-31°C טרופי
-                    </div>
-                    <div class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-2">
-                        <i class="fa-solid fa-hotel text-primary"></i> 3 יעדים: קאו לאק • קראבי • פוקט
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- Dynamic Tabs Container -->
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <!-- TAB 1: ITINERARY -->
+            <!-- TAB 1: ITINERARY (לוח זמנים ומסלול) -->
             <section id="tab-itinerary" class="tab-content block space-y-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                     <div>
@@ -221,7 +242,7 @@
                             </div>
                             <h4 class="text-lg font-bold text-slate-900">בטן גב, בריכות ענק וטיולים בקאו לאק</h4>
                             <p class="text-slate-600 text-sm mt-1">
-                                שהות בריזורט המפואר, בריכת הגלים ומגלשות המים לילדים, שיט קיאקים, ביקור במרכז לשימור כרישי הבמבוק שבמלון, שוק הלילה באנג ניאנג ושקיעות בחוף פקאראנג[cite: 1, 2].
+                                שהות בריזורט המפואר, בריכת הגלים ומגלשות המים לילדים, שיט קיאקים, ביקור במרכז לשימור כרישי הבמבוק שבמלון, שוק הלילה באנג ניאנג ושקיעות בחוף פקאראנג.
                             </p>
                             <div class="mt-4 flex flex-wrap gap-2 text-xs">
                                 <button onclick="switchTab('attractions')" class="text-primary hover:underline font-semibold"><i class="fa-solid fa-arrow-left ml-1"></i> צפה באטרקציות קאו לאק</button>
@@ -262,7 +283,7 @@
                             </div>
                             <h4 class="text-lg font-bold text-slate-900">מצוקי קרסט, איים טורקיזים וטבע פראי</h4>
                             <p class="text-slate-600 text-sm mt-1">
-                                שייט 4 האיים / חוף ריילי, קיאקים בלגונת המנגרובים או ת'אלן / קלונג רוד, יום בריכת האזמרגד והמעיינות החמים, טיול טרקטורונים בג'ונגל ושוק הלילה של קראבי טאון[cite: 1, 2].
+                                שייט 4 האיים / חוף ריילי, קיאקים בלגונת המנגרובים או ת'אלן / קלונג רוד, יום בריכת האזמרגד והמעיינות החמים, טיול טרקטורונים בג'ונגל ושוק הלילה של קראבי טאון.
                             </p>
                         </div>
                     </div>
@@ -319,7 +340,7 @@
                             </div>
                             <h4 class="text-lg font-bold text-slate-900">פעילויות, חופים, מופעי ענק ושופינג</h4>
                             <p class="text-slate-600 text-sm mt-1">
-                                שמורת הפילים האתית, פארק האקסטרים ואומגות Hanuman World, מופע האורות והקסם Carnival Magic, מופע הקרקס האקסטרימי, שווקי לילה, וטיול יום לצ'או לאן / קאו סוק[cite: 2].
+                                שמורת הפילים האתית, פארק האקסטרים ואומגות Hanuman World, מופע האורות והקסם Carnival Magic, מופע הקרקס האקסטרימי, שווקי לילה, וטיול יום לצ'או לאן / קאו סוק.
                             </p>
                         </div>
                     </div>
@@ -366,7 +387,7 @@
                     </div>
                     <div class="p-6 space-y-6">
                         <p class="text-slate-600 text-sm leading-relaxed">
-                            ריזורט 5 כוכבים יוקרתי השוכן על חוף Khuk Khak. כולל את בריכת הלגונה הארוכה ביותר בדרום-מזרח אסיה (3.2 ק"מ) המתפתלת לאורך כל הריזורט, מתחם מגלשות מים ובריכת גלים לילדים, ומרכז שימור ימי ייחודי[cite: 1, 2].
+                            ריזורט 5 כוכבים יוקרתי השוכן על חוף Khuk Khak. כולל את בריכת הלגונה הארוכה ביותר בדרום-מזרח אסיה (3.2 ק"מ) המתפתלת לאורך כל הריזורט, מתחם מגלשות מים ובריכת גלים לילדים, ומרכז שימור ימי ייחודי.
                         </p>
                         
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
@@ -374,25 +395,25 @@
                                 <i class="fa-solid fa-water text-primary text-base block mb-1"></i> בריכת 3.2 ק"מ + גלים
                             </div>
                             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                <i class="fa-solid fa-fish text-tropical text-base block mb-1"></i> חוות כרישי במבוק[cite: 2]
+                                <i class="fa-solid fa-fish text-tropical text-base block mb-1"></i> חוות כרישי במבוק
                             </div>
                             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                <i class="fa-solid fa-utensils text-sand text-base block mb-1"></i> 7 מסעדות וברים[cite: 2]
+                                <i class="fa-solid fa-utensils text-sand text-base block mb-1"></i> 7 מסעדות וברים
                             </div>
                             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                <i class="fa-solid fa-spa text-sunset text-base block mb-1"></i> Quan Spa מפואר[cite: 1, 2]
+                                <i class="fa-solid fa-spa text-sunset text-base block mb-1"></i> Quan Spa מפואר
                             </div>
                         </div>
 
                         <div class="bg-sky-50/70 border border-sky-100 rounded-2xl p-4 space-y-3">
                             <h5 class="font-bold text-sm text-sky-900 flex items-center gap-2">
-                                <i class="fa-solid fa-map-location-dot text-primary"></i> חלוקת האזורים בריזורט (לפי מפת המלון):[cite: 2]
+                                <i class="fa-solid fa-map-location-dot text-primary"></i> חלוקת האזורים בריזורט (לפי מפת המלון):
                             </h5>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-sky-800">
-                                <div>• <strong>אגף המשפחות (Wings 1-3):</strong> בריכת גלים, מגלשות Aqua Play ומועדון הילדים.[cite: 2]</div>
-                                <div>• <strong>אגף השקט (Wings 4-7):</strong> בריכות רגועות, ספא Quan ואזורי מנוחה.[cite: 1, 2]</div>
-                                <div>• <strong>קולינריה:</strong> מסעדת Waterfront (ארוחת בוקר), Olive (איטלקית), Ta-Krai (תאילנדית), Sakura (יפנית).[cite: 1, 2]</div>
-                                <div>• <strong>פעילויות:</strong> השכרת קיאקים, גלשני פאדלבורד וסיורי שימור כרישים.[cite: 2]</div>
+                                <div>• <strong>אגף המשפחות (Wings 1-3):</strong> בריכת גלים, מגלשות Aqua Play ומועדון הילדים.</div>
+                                <div>• <strong>אגף השקט (Wings 4-7):</strong> בריכות רגועות, ספא Quan ואזורי מנוחה.</div>
+                                <div>• <strong>קולינריה:</strong> מסעדת Waterfront (ארוחת בוקר), Olive (איטלקית), Ta-Krai (תאילנדית), Sakura (יפנית).</div>
+                                <div>• <strong>פעילויות:</strong> השכרת קיאקים, גלשני פאדלבורד וסיורי שימור כרישים.</div>
                             </div>
                         </div>
 
@@ -513,13 +534,13 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">תצפית סאמט נאנגשה ומפל לאם פי</h4>[cite: 1, 2]
-                                <p class="text-xs text-slate-500 mt-1">נוף פנורמי מהיפים בתאילנד מעל מפרץ פאנג נגה, בשילוב רחצה מרעננת במפל לאם פי בלב הג'ונגל.[cite: 1, 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">תצפית סאמט נאנגשה ומפל לאם פי</h4>
+                                <p class="text-xs text-slate-500 mt-1">נוף פנורמי מהיפים בתאילנד מעל מפרץ פאנג נגה, בשילוב רחצה מרעננת במפל לאם פי בלב הג'ונגל.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> חצי יום / יום שלם</span>[cite: 2]
-                                    <span class="font-semibold text-tropical">מתאים לכל הגילאים</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> חצי יום / יום שלם</span>
+                                    <span class="font-semibold text-tropical">מתאים לכל הגילאים</span>
                                 </div>
                             </div>
                         </div>
@@ -536,13 +557,13 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">קיאקים במנגרובים (או ת'אלן / קלונג רוד)</h4>[cite: 1, 2]
-                                <p class="text-xs text-slate-500 mt-1">חוויית חתירה רגועה וקסומה בין יערות מנגרובים עתיקים, קניוני סלע קרסטיים ומים שקופים לחלוטין.[cite: 1, 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">קיאקים במנגרובים (או ת'אלן / קלונג רוד)</h4>
+                                <p class="text-xs text-slate-500 mt-1">חוויית חתירה רגועה וקסומה בין יערות מנגרובים עתיקים, קניוני סלע קרסטיים ומים שקופים לחלוטין.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3-4 שעות</span>[cite: 2]
-                                    <span class="font-semibold text-primary">חוויה משפחתית מומלצת</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3-4 שעות</span>
+                                    <span class="font-semibold text-primary">חוויה משפחתית מומלצת</span>
                                 </div>
                             </div>
                         </div>
@@ -559,13 +580,13 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">בריכת האזמרגד, הלגונה הכחולה ומעיינות חמים</h4>[cite: 1, 2]
-                                <p class="text-xs text-slate-500 mt-1">שמורת טבע מדהימה עם שבילי הליכה בג'ונגל, רחצה בבריכה טבעית בצבע אזמרגד ומפלים של מים תרמיים חמים.[cite: 1, 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">בריכת האזמרגד, הלגונה הכחולה ומעיינות חמים</h4>
+                                <p class="text-xs text-slate-500 mt-1">שמורת טבע מדהימה עם שבילי הליכה בג'ונגל, רחצה בבריכה טבעית בצבע אזמרגד ומפלים של מים תרמיים חמים.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום מלא</span>[cite: 2]
-                                    <span class="font-semibold text-tropical">כולל מקדש מערת הנמר</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום מלא</span>
+                                    <span class="font-semibold text-tropical">כולל מקדש מערת הנמר</span>
                                 </div>
                             </div>
                         </div>
@@ -605,13 +626,13 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">חוות פילים אתית (ללא רכיבה)</h4>[cite: 2]
-                                <p class="text-xs text-slate-500 mt-1">מפגש חינוכי ומרגש עם פילים שניצלו: הכנת מזון בריאות, האכלה ביד, רחצה בבוץ וליווי הפילים בטבע.[cite: 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">חוות פילים אתית (ללא רכיבה)</h4>
+                                <p class="text-xs text-slate-500 mt-1">מפגש חינוכי ומרגש עם פילים שניצלו: הכנת מזון בריאות, האכלה ביד, רחצה בבוץ וליווי הפילים בטבע.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
                                     <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-4 שעות (בוקר/צהריים)</span>
-                                    <span class="font-semibold text-tropical">חובה לכל המשפחה</span>[cite: 2]
+                                    <span class="font-semibold text-tropical">חובה לכל המשפחה</span>
                                 </div>
                             </div>
                         </div>
@@ -628,13 +649,13 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">פארק האקסטרים והאומגות Hanuman World</h4>[cite: 2]
-                                <p class="text-xs text-slate-500 mt-1">אומגות מעל צמרות העצים, גשרי חבלים תלויים, ורכבת הרים ייחודית בתוך הג'ונגל (Roller Zipline).[cite: 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">פארק האקסטרים והאומגות Hanuman World</h4>
+                                <p class="text-xs text-slate-500 mt-1">אומגות מעל צמרות העצים, גשרי חבלים תלויים, ורכבת הרים ייחודית בתוך הג'ונגל (Roller Zipline).</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3 שעות</span>[cite: 2]
-                                    <span class="font-semibold text-sand">מגיל 4 ומעלה</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3 שעות</span>
+                                    <span class="font-semibold text-sand">מגיל 4 ומעלה</span>
                                 </div>
                             </div>
                         </div>
@@ -651,12 +672,12 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">מופע האורות והקרנבל Carnival Magic</h4>[cite: 2]
-                                <p class="text-xs text-slate-500 mt-1">פארק נושא לילי מרהיב זוכה שיאי גינס: מיליוני נורות לד, תהלוכת ענק מרהיבה ומתחם קולינרי עשיר.[cite: 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">מופע האורות והקרנבל Carnival Magic</h4>
+                                <p class="text-xs text-slate-500 mt-1">פארק נושא לילי מרהיב זוכה שיאי גינס: מיליוני נורות לד, תהלוכת ענק מרהיבה ומתחם קולינרי עשיר.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> ערב (17:30 - 22:30)</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> ערב (17:30 - 22:30)</span>
                                     <span class="font-semibold text-primary">חוויה ויזואלית מטורפת</span>
                                 </div>
                             </div>
@@ -674,12 +695,12 @@
                         </div>
                         <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
-                                <h4 class="font-bold text-lg text-slate-900">שמורת קאו סוק ואגם צ'או לאן (Cheow Lan Lake)</h4>[cite: 2]
-                                <p class="text-xs text-slate-500 mt-1">שייט בסירת לונגטייל מסורתית בין צוקי גיר עוצרי נשימה המזדקרים מתוך מי טורקיז, רפטינג במבוק ומערות נטיפים.[cite: 2]</p>
+                                <h4 class="font-bold text-lg text-slate-900">שמורת קאו סוק ואגם צ'או לאן (Cheow Lan Lake)</h4>
+                                <p class="text-xs text-slate-500 mt-1">שייט בסירת לונגטייל מסורתית בין צוקי גיר עוצרי נשימה המזדקרים מתוך מי טורקיז, רפטינג במבוק ומערות נטיפים.</p>
                             </div>
                             <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
                                 <div class="flex items-center justify-between text-slate-600">
-                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום שלם</span>[cite: 2]
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום שלם</span>
                                     <span class="font-semibold text-tropical">טבע עוצר נשימה</span>
                                 </div>
                             </div>
@@ -915,7 +936,7 @@
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="insurance" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>פוליסות ביטוח נסיעות ורפואי מודפסות/בנייד</span>[cite: 2]
+                                <span>פוליסות ביטוח נסיעות ורפואי מודפסות/בנייד</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="vouchers" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
@@ -936,7 +957,7 @@
                         <div class="space-y-2.5 text-sm" id="pack-cat-clothes">
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="swimsuits" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>בגדי ים (לפחות 2-3 סטים לכל אחד)</span>[cite: 2]
+                                <span>בגדי ים (לפחות 2-3 סטים לכל אחד)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="uv-shirts" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
@@ -944,11 +965,11 @@
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="aquashoes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>נעלי מים / סנדלים לפעילויות וסלעים</span>[cite: 2]
+                                <span>נעלי מים / סנדלים לפעילויות וסלעים</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="temple-clothes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>בגדים צנועים (מכסה כתפיים וברכיים) למקדשים</span>[cite: 2]
+                                <span>בגדים צנועים (מכסה כתפיים וברכיים) למקדשים</span>
                             </label>
                         </div>
                     </div>
@@ -961,11 +982,11 @@
                         <div class="space-y-2.5 text-sm" id="pack-cat-med">
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="sunscreen" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>קרם הגנה בעל מקדם גבוה + אלוורה</span>[cite: 2]
+                                <span>קרם הגנה בעל מקדם גבוה + אלוורה</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="mosquito" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>חומר דוחה יתושים טרופיים</span>[cite: 2]
+                                <span>חומר דוחה יתושים טרופיים</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="kids-meds" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
@@ -986,7 +1007,7 @@
                         <div class="space-y-2.5 text-sm" id="pack-cat-tech">
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="waterproof-pouch" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
-                                <span>כיסויים אטומים למים לטלפונים</span>[cite: 2]
+                                <span>כיסויים אטומים למים לטלפונים</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
                                 <input type="checkbox" onchange="savePackingState()" data-item="powerbanks" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
@@ -1125,7 +1146,49 @@
         setInterval(updateLiveClocks, 1000);
         updateLiveClocks();
 
-        // --- 3. Live Countdown Timer ---
+        // --- 3. Live Weather System for 3 Destinations (Open-Meteo API) ---
+        const DESTINATIONS = {
+            khaolak: { lat: 8.65, lon: 98.25, name: 'קאו לאק' },
+            krabi: { lat: 8.08, lon: 98.91, name: 'קראבי' },
+            phuket: { lat: 7.88, lon: 98.39, name: 'פוקט' }
+        };
+
+        function getWeatherDesc(code) {
+            if (code === 0) return { desc: 'בהיר ושמשי', icon: 'fa-solid fa-sun text-sand' };
+            if (code <= 3) return { desc: 'מעונן חלקית', icon: 'fa-solid fa-cloud-sun text-sand' };
+            if (code <= 48) return { desc: 'ערפילי', icon: 'fa-solid fa-smog text-slate-300' };
+            if (code <= 67) return { desc: 'גשם טרופי קל', icon: 'fa-solid fa-cloud-rain text-primary' };
+            if (code <= 82) return { desc: 'ממטרים', icon: 'fa-solid fa-cloud-showers-heavy text-primary' };
+            return { desc: 'סופת רעמים', icon: 'fa-solid fa-cloud-bolt text-sunset' };
+        }
+
+        async function fetchLiveWeather() {
+            for (const [key, dest] of Object.entries(DESTINATIONS)) {
+                try {
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${dest.lat}&longitude=${dest.lon}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FBangkok`;
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    
+                    if (data && data.current) {
+                        const temp = Math.round(data.current.temperature_2m);
+                        const code = data.current.weather_code;
+                        const weather = getWeatherDesc(code);
+
+                        document.getElementById(`weather-temp-${key}`).innerText = `${temp}°C`;
+                        document.getElementById(`weather-desc-${key}`).innerText = weather.desc;
+                        document.getElementById(`weather-icon-${key}`).innerHTML = `<i class="${weather.icon}"></i>`;
+                    }
+                } catch (e) {
+                    document.getElementById(`weather-temp-${key}`).innerText = '30°C';
+                    document.getElementById(`weather-desc-${key}`).innerText = 'טרופי חמים';
+                    document.getElementById(`weather-icon-${key}`).innerHTML = '<i class="fa-solid fa-cloud-sun text-sand"></i>';
+                }
+            }
+        }
+        fetchLiveWeather();
+        setInterval(fetchLiveWeather, 300000); // Refresh every 5 minutes
+
+        // --- 4. Live Countdown Timer ---
         function updateCountdown() {
             const targetDate = new Date('2026-09-23T11:25:00+07:00').getTime();
             const now = new Date().getTime();
@@ -1152,7 +1215,7 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // --- 4. Itinerary Filters ---
+        // --- 5. Itinerary Filters ---
         function filterItinerary(dest) {
             document.querySelectorAll('.itin-filter-btn').forEach(btn => {
                 if (btn.getAttribute('data-filter') === dest) {
@@ -1171,7 +1234,7 @@
             });
         }
 
-        // --- 5. Attractions Filters & Favorites (localStorage) ---
+        // --- 6. Attractions Filters & Favorites (localStorage) ---
         const FAVORITES_KEY = 'thailand_trip_favorites_2026';
 
         function getFavorites() {
@@ -1230,7 +1293,7 @@
             });
         }
 
-        // --- 6. Currency Converter ---
+        // --- 7. Currency Converter ---
         const RATE_THB_TO_ILS = 0.10416;
         const RATE_ILS_TO_THB = 9.60;
 
@@ -1252,7 +1315,7 @@
             convertCurrency('thb');
         }
 
-        // --- 7. Packing List State & LocalStorage ---
+        // --- 8. Packing List State & LocalStorage ---
         const PACKING_KEY = 'thailand_trip_packing_state_2026';
         const CUSTOM_PACK_KEY = 'thailand_trip_custom_packing_2026';
 
@@ -1314,7 +1377,7 @@
             }
         }
 
-        // --- 8. Google Drive Script: Upload, Sync, Preview & Download ---
+        // --- 9. Google Drive Script: Upload, Sync, Preview & Download ---
         function openScriptModal() {
             document.getElementById('script-url-input').value = localStorage.getItem('thailand_gdrive_url') || '';
             document.getElementById('script-modal').classList.remove('hidden');
@@ -1446,7 +1509,7 @@
             renderLocalFallbackDocs();
         }
 
-        // --- 9. In-App Preview Modal Logic ---
+        // --- 10. In-App Preview Modal Logic ---
         function previewFile(encodedName, url) {
             const name = decodeURIComponent(encodedName);
             document.getElementById('preview-title').innerText = name;
