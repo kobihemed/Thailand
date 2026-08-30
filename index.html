@@ -405,8 +405,8 @@
                             </h5>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-sky-800">
                                 <div>• <strong>אגף המשפחות (Wings 1-3):</strong> בריכת גלים, מגלשות Aqua Play ומועדון הילדים.</div>
-                                <div>• <strong>אגף השקט (Wings 4-7):</strong> בריכות רגועות, ספא Quan ואזורי מנוחה.[cite: 1, 2]</div>
-                                <div>• <strong>קולינריה:</strong> מסעדת Waterfront (ארוחת בוקר), Olive (איטלקית), Ta-Krai (תאילנדית), Sakura (יפנית).[cite: 1, 2]</div>
+                                <div>• <strong>אגף השקט (Wings 4-7):</strong> בריכות רגועות, ספא Quan ואזורי מנוחה[cite: 1, 2].</div>
+                                <div>• <strong>קולינריה:</strong> מסעדת Waterfront (ארוחת בוקר), Olive (איטלקית), Ta-Krai (תאילנדית), Sakura (יפנית)[cite: 1, 2].</div>
                                 <div>• <strong>פעילויות:</strong> השכרת קיאקים, גלשני פאדלבורד וסיורי שימור כרישים.</div>
                             </div>
                         </div>
@@ -618,7 +618,7 @@
                                 <i class="fa-regular fa-heart"></i>
                             </button>
                         </div>
-                        <div class="p-5 flex-grow flex-col justify-between space-y-4">
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                             <div>
                                 <h4 class="font-bold text-lg text-slate-900">בריכת האזמרגד, הלגונה הכחולה ומעיינות חמים[cite: 1, 2]</h4>
                                 <p class="text-xs text-slate-500 mt-1">שמורת טבע מדהימה עם שבילי הליכה בג'ונגל, רחצה בבריכה טבעית בצבע אזמרגד ומפלים של מים תרמיים חמים[cite: 1, 2].</p>
@@ -880,9 +880,6 @@
                         <div class="flex items-center gap-2 self-start sm:self-auto">
                             <button onclick="fetchDriveFiles()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition flex items-center gap-1.5" title="רענן רשימה מהדרייב">
                                 <i class="fa-solid fa-rotate text-slate-500"></i> רענן קבצים
-                            </button>
-                            <button onclick="openScriptModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-gear text-slate-400"></i> הגדרות חיבור ל-Drive
                             </button>
                         </div>
                     </div>
@@ -1207,27 +1204,6 @@
         </button>
     </nav>
 
-    <!-- Modal for Drive Script Config -->
-    <div id="script-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-4 text-right shadow-2xl">
-            <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                <h4 class="text-lg font-bold text-slate-900">הגדרת תיקיית Google Drive</h4>
-                <button onclick="closeScriptModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <p class="text-xs text-slate-600 leading-relaxed">
-                הדבק כאן את כתובת ה-Web App שנוצרה ב-Google Apps Script (המקושרת לתיקייה שלך בדרייב) כדי להעלות ולמשוך קבצים בזמן אמת:
-            </p>
-            <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">Google Apps Script Web App URL:</label>
-                <input type="url" id="script-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-primary">
-            </div>
-            <div class="flex justify-end gap-2 pt-3">
-                <button onclick="closeScriptModal()" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">ביטול</button>
-                <button onclick="saveScriptUrl()" class="px-4 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/90 rounded-xl transition">שמור וסנכרן</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal for In-App File Preview -->
     <div id="preview-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden">
         <div class="bg-white rounded-3xl max-w-4xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl">
@@ -1250,6 +1226,11 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // ==========================================
+        // כתובת ה-GOOGLE APPS SCRIPT מוטמעת קשיח כאן
+        // ==========================================
+        const GOOGLE_DRIVE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
         // --- Quick Order Site Open & Copy Password ---
         const ORDER_URL = "https://www.btc-thai.com/offer/iw/quote?q=952f60790a2e7ed3aed229f2037c151192fefa81057c6167101d82dbc9ba4862";
         const ORDER_PASS = "0506210255";
@@ -1464,10 +1445,10 @@
         }
 
         // --- 7. Currency Converter (Triple Sync: THB / ILS / USD) ---
-        const RATE_THB_TO_ILS = 0.10416; // 1 THB = ~0.10416 ILS
-        const RATE_ILS_TO_THB = 9.60;    // 1 ILS = ~9.60 THB
-        const RATE_THB_TO_USD = 0.02857; // 1 THB = ~0.02857 USD ($1 ≈ 35 THB)
-        const RATE_USD_TO_THB = 35.00;   // $1 USD = ~35.00 THB
+        const RATE_THB_TO_ILS = 0.10416;
+        const RATE_ILS_TO_THB = 9.60;
+        const RATE_THB_TO_USD = 0.02857;
+        const RATE_USD_TO_THB = 35.00;
 
         function convertCurrency(source) {
             const thbInput = document.getElementById('thb-input');
@@ -1558,37 +1539,19 @@
             }
         }
 
-        // --- 9. Google Drive Script: Upload, Sync, Preview & Download ---
-        function openScriptModal() {
-            document.getElementById('script-url-input').value = localStorage.getItem('thailand_gdrive_url') || '';
-            document.getElementById('script-modal').classList.remove('hidden');
-        }
-
-        function closeScriptModal() {
-            document.getElementById('script-modal').classList.add('hidden');
-        }
-
-        function saveScriptUrl() {
-            const url = document.getElementById('script-url-input').value.trim();
-            localStorage.setItem('thailand_gdrive_url', url);
-            closeScriptModal();
-            fetchDriveFiles();
-            alert('הגדרות החיבור ל-Google Drive נשמרו בהצלחה!');
-        }
-
+        // --- 9. Google Drive Script: Direct Hardcoded Upload, Sync, Preview & Download ---
         function fetchDriveFiles() {
-            const scriptUrl = localStorage.getItem('thailand_gdrive_url');
             const listEl = document.getElementById('uploaded-files-list');
             const badgeEl = document.getElementById('files-count-badge');
 
-            if (!scriptUrl) {
+            if (!GOOGLE_DRIVE_SCRIPT_URL || GOOGLE_DRIVE_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
                 renderLocalFallbackDocs();
                 return;
             }
 
             listEl.innerHTML = '<div class="p-2 text-slate-400 text-center text-xs"><i class="fa-solid fa-spinner fa-spin ml-1"></i> טוען קבצים מה-Drive...</div>';
 
-            fetch(scriptUrl)
+            fetch(GOOGLE_DRIVE_SCRIPT_URL)
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === 'success' && data.files) {
@@ -1637,7 +1600,6 @@
             const files = e.target.files;
             if (!files.length) return;
 
-            const scriptUrl = localStorage.getItem('thailand_gdrive_url');
             const status = document.getElementById('upload-status');
             status.classList.remove('hidden', 'text-red-500', 'text-emerald-600');
             status.classList.add('text-primary');
@@ -1647,8 +1609,8 @@
                 const reader = new FileReader();
                 reader.onload = function(evt) {
                     const base64 = evt.target.result;
-                    if (scriptUrl) {
-                        fetch(scriptUrl, {
+                    if (GOOGLE_DRIVE_SCRIPT_URL && !GOOGLE_DRIVE_SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
+                        fetch(GOOGLE_DRIVE_SCRIPT_URL, {
                             method: 'POST',
                             body: JSON.stringify({
                                 fileName: file.name,
@@ -1673,7 +1635,7 @@
                         setTimeout(() => {
                             status.classList.remove('text-primary');
                             status.classList.add('text-emerald-600');
-                            status.innerText = 'הקובץ נשמר מקומית! (הגדר את ה-Script להעלאה לדרייב)';
+                            status.innerText = 'הקובץ נשמר מקומית!';
                             saveLocalDoc(file.name, base64, base64);
                         }, 500);
                     }
