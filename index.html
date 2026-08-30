@@ -1,713 +1,1323 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>תאילנד 2026 - חמד/מורגנשטרן</title>
-    <!-- Tailwind CSS -->
+    <title>תאילנד 2026 - חמד/מורגנשטרן | קאו לאק • קראבי • פוקט</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9', // Sky blue
+                        tropical: '#059669', // Emerald jungle
+                        sand: '#f59e0b', // Amber gold
+                        sunset: '#f43f5e', // Coral red
+                        dark: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts: Heebo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Heebo', sans-serif;
-            background-color: #f8fafc;
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .hero-gradient {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0d9488 50%, #059669 100%);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2039&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans pb-24 md:pb-8">
 
     <!-- Top Navigation Bar -->
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3">
-                    <span class="text-3xl">🌴</span>
-                    <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">תאילנד 2026</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <a href="https://wa.me/972539451243" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-semibold py-2 px-4 rounded-full flex items-center gap-2 transition shadow-sm">
-                        <i class="fab fa-whatsapp text-base"></i>
-                        <span>סוכן אישי (איליה)</span>[cite: 1]
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero-gradient text-white py-12 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        <div class="max-w-4xl mx-auto space-y-6 relative z-10">
-            <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-medium border border-white/30">
-                <span>🗓️ 23 בספטמבר - 10 באוקטובר 2026</span>[cite: 1]
-            </div>
-            
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-                תאילנד 2026 - חמד/מורגנשטרן
-            </h1>
-            
-            <p class="text-teal-50 text-base sm:text-lg max-w-2xl mx-auto font-normal">
-                קאו לאק (4 לילות) • קראבי (5 לילות) • פוקט (8 לילות)[cite: 1]
-            </p>
-
-            <!-- Dual Real-Time World Clocks -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto pt-2">
-                <div class="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center justify-between text-right">
-                    <div>
-                        <div class="text-xs font-bold text-slate-200">🇮🇱 שעון ישראל</div>
-                        <div id="israel-date" class="text-[11px] text-teal-200">--/--/----</div>
-                    </div>
-                    <div id="israel-clock" class="text-2xl font-mono font-bold text-emerald-300">00:00:00</div>
-                </div>
-                <div class="bg-black/30 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center justify-between text-right">
-                    <div>
-                        <div class="text-xs font-bold text-amber-200">🇹🇭 שעון תאילנד (+4)</div>
-                        <div id="thai-date" class="text-[11px] text-teal-200">--/--/----</div>
-                    </div>
-                    <div id="thai-clock" class="text-2xl font-mono font-bold text-amber-300">00:00:00</div>
+    <header class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-white/10 text-white transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="switchTab('itinerary')">
+                <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-tropical to-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
+                    <i class="fa-solid fa-plane-departure"></i>
+                </span>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-tight">תאילנד 2026 🌴</h1>
+                    <p class="text-xs text-slate-300">חמד / מורגנשטרן</p>[cite: 1]
                 </div>
             </div>
 
-            <!-- Countdown Timer -->
-            <div class="pt-2">
-                <div class="text-xs font-semibold uppercase tracking-widest text-teal-100 mb-3">ספירה לאחור לנחיתה</div>
-                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20">
-                        <span id="days" class="text-2xl sm:text-4xl font-black block">0</span>
-                        <span class="text-xs text-teal-100">ימים</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20">
-                        <span id="hours" class="text-2xl sm:text-4xl font-black block">0</span>
-                        <span class="text-xs text-teal-100">שעות</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20">
-                        <span id="minutes" class="text-2xl sm:text-4xl font-black block">0</span>
-                        <span class="text-xs text-teal-100">דקות</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/20">
-                        <span id="seconds" class="text-2xl sm:text-4xl font-black block">0</span>
-                        <span class="text-xs text-teal-100">שניות</span>
-                    </div>
-                </div>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-1 space-x-reverse bg-slate-800/60 p-1.5 rounded-full border border-white/10">
+                <button onclick="switchTab('itinerary')" class="nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition active-tab text-white bg-primary shadow-sm" data-tab="itinerary">
+                    <i class="fa-solid fa-calendar-days ml-1.5"></i> מסלול יומי
+                </button>
+                <button onclick="switchTab('hotels')" class="nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="hotels">
+                    <i class="fa-solid fa-hotel ml-1.5"></i> ריזורטים
+                </button>
+                <button onclick="switchTab('attractions')" class="nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="attractions">
+                    <i class="fa-solid fa-compass ml-1.5"></i> אטרקציות
+                </button>
+                <button onclick="switchTab('tools')" class="nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="tools">
+                    <i class="fa-solid fa-calculator ml-1.5"></i> כלים ודרייב
+                </button>
+                <button onclick="switchTab('packing')" class="nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="packing">
+                    <i class="fa-solid fa-list-check ml-1.5"></i> צ'ק ליסט
+                </button>
+            </nav>
+
+            <!-- Emergency Phone Quick Action -->
+            <div class="flex items-center space-x-2 space-x-reverse">
+                <a href="tel:*8880" class="flex items-center space-x-1.5 space-x-reverse bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500 hover:text-white px-3 py-1.5 rounded-full text-xs font-semibold transition">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>המרכז למטייל (*8880)</span>[cite: 1]
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 space-y-12">
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-16">
 
-        <!-- Module 1: Google Drive Document Upload -->
-        <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl">
-                        <i class="fab fa-google-drive"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">תיקיית מסמכים והעלאה ל-Google Drive</h2>
-                        <p class="text-xs sm:text-sm text-slate-500">העלאת צילומי דרכונים, ביטוחי נסיעות וכרטיסים ישירות לדרייב[cite: 1]</p>
-                    </div>
-                </div>
-                <button onclick="openScriptModal()" class="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-teal-600 font-medium bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition">
-                    <i class="fas fa-cog"></i>
-                    <span>הגדרת חיבור ל-Drive</span>
-                </button>
-            </div>
+        <!-- Hero Section & Countdown -->
+        <section class="hero-gradient text-white pt-12 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto text-center space-y-6">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/30 border border-primary/40 backdrop-blur-md">
+                    <i class="fa-solid fa-clock"></i> 23 ספטמבר - 10 אוקטובר 2026 (17 לילות)[cite: 1]
+                </span>
+                
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">תאילנד 2026 - חמד/מורגנשטרן</h2>
+                
+                <p class="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto">
+                    כל פרטי הטיסה, ההסעות, המלונות המפוארים והאטרקציות במקום אחד מסודר ונגיש אופליין.
+                </p>
 
-            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 border-2 border-dashed border-slate-300 hover:border-teal-500 rounded-2xl p-6 text-center transition bg-slate-50/50 hover:bg-white flex flex-col justify-center items-center cursor-pointer" onclick="document.getElementById('file-input').click()">
-                    <input type="file" id="file-input" class="hidden" multiple onchange="handleFileSelect(event)">
-                    <div class="w-12 h-12 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center text-xl mb-3">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800 text-sm">לחצו לבחירת מסמך או גררו קבצים לכאן</h3>
-                    <p class="text-xs text-slate-500 mt-1">תומך ב-PDF, תמונות דרכון (JPG/PNG), שוברים וכו'[cite: 1]</p>
-                    <div id="upload-status" class="mt-3 text-xs font-semibold hidden"></div>
-                </div>
-
-                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">מסמכים בטיול</h4>
-                        <div id="uploaded-files-list" class="space-y-2 max-h-36 overflow-y-auto text-xs">
-                            <div class="p-2.5 bg-white rounded-xl flex items-center justify-between border border-slate-200">
-                                <span class="truncate font-medium text-slate-700">📄 שובר_הזמנה_R126278.pdf[cite: 1]</span>
-                                <span class="text-emerald-600 font-semibold text-[11px]"><i class="fas fa-check-circle"></i> נשמר</span>
-                            </div>
+                <!-- Dual World Clocks (Israel & Thailand) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-4 max-w-md mx-auto pt-1">
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md text-right">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-1 mb-1">
+                            <span class="text-xs font-bold text-slate-200">🇮🇱 שעון ישראל</span>
+                            <span id="live-israel-date" class="text-[10px] text-slate-400">--/--</span>
+                        </div>
+                        <div id="live-israel-clock" class="text-xl sm:text-2xl font-black font-mono text-emerald-400 text-center tracking-wider">
+                            00:00:00
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-400">הקבצים מועלים ישירות לדרייב או נשמרים מקומית בדפדפן.</p>
+
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md text-right">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-1 mb-1">
+                            <span class="text-xs font-bold text-amber-300">🇹🇭 שעון תאילנד (+4)</span>
+                            <span id="live-thai-date" class="text-[10px] text-slate-400">--/--</span>
+                        </div>
+                        <div id="live-thai-clock" class="text-xl sm:text-2xl font-black font-mono text-amber-300 text-center tracking-wider">
+                            00:00:00
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto pt-2">
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md">
+                        <span id="cd-days" class="block text-2xl sm:text-4xl font-extrabold text-primary">00</span>
+                        <span class="text-xs text-slate-300">ימים</span>
+                    </div>
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md">
+                        <span id="cd-hours" class="block text-2xl sm:text-4xl font-extrabold text-tropical">00</span>
+                        <span class="text-xs text-slate-300">שעות</span>
+                    </div>
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md">
+                        <span id="cd-minutes" class="block text-2xl sm:text-4xl font-extrabold text-sand">00</span>
+                        <span class="text-xs text-slate-300">דקות</span>
+                    </div>
+                    <div class="bg-slate-900/70 border border-white/10 rounded-2xl p-3 shadow-xl backdrop-blur-md">
+                        <span id="cd-seconds" class="block text-2xl sm:text-4xl font-extrabold text-sunset">00</span>
+                        <span class="text-xs text-slate-300">שניות</span>
+                    </div>
+                </div>
+
+                <!-- Live Info Badges -->
+                <div class="flex flex-wrap justify-center items-center gap-3 pt-4 text-xs font-medium text-slate-200">
+                    <div class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-sun text-sand"></i> מזג אוויר ממוצע: 29°C-31°C טרופי
+                    </div>
+                    <div class="bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 backdrop-blur-sm flex items-center gap-2">
+                        <i class="fa-solid fa-hotel text-primary"></i> 3 יעדים: קאו לאק • קראבי • פוקט[cite: 1]
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Module 2: Hotels & Destinations Overview -->
-        <section class="space-y-6">
-            <div class="flex items-center justify-between">
+        <!-- Dynamic Tabs Container -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+            <!-- TAB 1: ITINERARY (לוח זמנים ומסלול) -->
+            <section id="tab-itinerary" class="tab-content block space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">מסלול הטיול המלא</h3>
+                        <p class="text-slate-500 text-sm">התפלגות לפי יעדים, מלונות, טיסות והסעות פרטיות</p>
+                    </div>
+                    <!-- Quick Destination Filter -->
+                    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                        <button onclick="filterItinerary('all')" class="itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white" data-filter="all">הכל</button>
+                        <button onclick="filterItinerary('khaolak')" class="itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="khaolak">קאו לאק (4 לילות)[cite: 1]</button>
+                        <button onclick="filterItinerary('krabi')" class="itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="krabi">קראבי (5 לילות)[cite: 1]</button>
+                        <button onclick="filterItinerary('phuket')" class="itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-filter="phuket">פוקט (8 לילות)[cite: 1]</button>
+                    </div>
+                </div>
+
+                <!-- Timeline Cards -->
+                <div class="space-y-6 relative before:absolute before:inset-0 before:right-6 md:before:right-8 before:w-0.5 before:bg-slate-200">
+                    
+                    <!-- Day 1: Arrival & Transfer to Khao Lak -->
+                    <div class="itin-item khaolak relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            23.09[cite: 1]
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-50 text-primary border border-sky-200">
+                                    <i class="fa-solid fa-plane-arrival ml-1"></i> נחיתה והגעה
+                                </span>
+                                <span class="text-xs text-slate-400">יום רביעי</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">איסוף משדה התעופה בפוקט (HKT) ונסיעה לקאו לאק</h4>
+                            <p class="text-slate-600 text-sm mt-1">
+                                נחיתה בפוקט ב-11:25[cite: 1]. נהג פרטי עם שלט ממתין לנו בשער הנחיתות, מעבר נוח בוואן ממוזג (כשעה ורבע) היישר לריזורט <strong>JW Marriott Khao Lak Resort & Spa</strong>[cite: 1].
+                            </p>
+                            <div class="mt-4 flex flex-wrap items-center gap-2 text-xs">
+                                <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-clock ml-1 text-slate-400"></i> צ'ק-אין: 15:00</span>
+                                <span class="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg"><i class="fa-solid fa-water ml-1 text-emerald-500"></i> חוף קוקוקס ובריכת 3.2 ק"מ</span>[cite: 1]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Khao Lak Days -->
+                    <div class="itin-item khaolak relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-tropical text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            24-26
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-tropical border border-emerald-200">
+                                    <i class="fa-solid fa-umbrella-beach ml-1"></i> קאו לאק (4 לילות)[cite: 1]
+                                </span>
+                                <span class="text-xs text-slate-400">חמישי - שבת</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">בטן גב, בריכות ענק וטיולים בקאו לאק</h4>
+                            <p class="text-slate-600 text-sm mt-1">
+                                שהות בריזורט המפואר, בריכת הגלים ומגלשות המים לילדים, שיט קיאקים, ביקור במרכז לשימור כרישי הבמבוק שבמלון, שוק הלילה באנג ניאנג ושקיעות בחוף פקאראנג[cite: 1, 2].
+                            </p>
+                            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                                <button onclick="switchTab('attractions')" class="text-primary hover:underline font-semibold"><i class="fa-solid fa-arrow-left ml-1"></i> צפה באטרקציות קאו לאק</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transfer to Krabi -->
+                    <div class="itin-item krabi relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-sand text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            27.09[cite: 1]
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-sand border border-amber-200">
+                                    <i class="fa-solid fa-van-shuttle ml-1"></i> מעבר יעד
+                                </span>
+                                <span class="text-xs text-slate-400">יום ראשון | 12:00[cite: 1]</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">מעבר מקאו לאק לקראבי (Dusit Thani)</h4>[cite: 1]
+                            <p class="text-slate-600 text-sm mt-1">
+                                איסוף ב-12:00 מהלובי של JW Marriott ברכב פרטי[cite: 1]. נסיעה נופית ונוחה של כשעתיים ורבע לריזורט <strong>Dusit Thani Krabi Beach Resort</strong> בחוף קלונג מואנג[cite: 1].
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Krabi Days -->
+                    <div class="itin-item krabi relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-tropical text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            28-01
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-tropical border border-emerald-200">
+                                    <i class="fa-solid fa-mountain-sun ml-1"></i> קראבי (5 לילות)[cite: 1]
+                                </span>
+                                <span class="text-xs text-slate-400">שני - חמישי</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">מצוקי קרסט, איים טורקיזים וטבע פראי</h4>
+                            <p class="text-slate-600 text-sm mt-1">
+                                שייט 4 האיים / חוף ריילי, קיאקים בלגונת המנגרובים או ת'אלן / קלונג רוד, יום בריכת האזמרגד והמעיינות החמים, טיול טרקטורונים בג'ונגל ושוק הלילה של קראבי טאון[cite: 1, 2].
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer to Phuket -->
+                    <div class="itin-item phuket relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-sunset text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            02.10[cite: 1]
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-50 text-sunset border border-rose-200">
+                                    <i class="fa-solid fa-van-shuttle ml-1"></i> מעבר יעד
+                                </span>
+                                <span class="text-xs text-slate-400">יום שישי | 12:00[cite: 1]</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">מעבר מקראבי לפוקט (Phuket Marriott Merlin Beach)</h4>[cite: 1]
+                            <p class="text-slate-600 text-sm mt-1">
+                                איסוף ב-12:00 מהלובי של Dusit Thani ונסיעה פרטית (כ-3 שעות) למלון <strong>Phuket Marriott Resort & Spa, Merlin Beach</strong> הממוקם על מפרץ פרטי ורגוע[cite: 1].
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Phuket Highlight: Andamanda -->
+                    <div class="itin-item phuket relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            04.10[cite: 1]
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border-2 border-primary/30 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-primary text-white">
+                                    <i class="fa-solid fa-star ml-1"></i> יום אטרקציה סגור מראש![cite: 1]
+                                </span>
+                                <span class="text-xs text-slate-500 font-semibold">יום ראשון</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">פארק המים הענק אנדמנדה פוקט (Andamanda Waterpark)</h4>[cite: 1]
+                            <p class="text-slate-600 text-sm mt-1">
+                                כרטיסי כניסה סגורים לכל המשפחה! מתחם מגלשות מים אקסטרים, בריכת גלים ענקית עם חוף מלאכותי, מגלשות ילדים ונהר אבובים אינסופי[cite: 1].
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Rest of Phuket Days -->
+                    <div class="itin-item phuket relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-tropical text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            05-09
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-tropical border border-emerald-200">
+                                    <i class="fa-solid fa-island-tropical ml-1"></i> פוקט וסביבתה (8 לילות)[cite: 1]
+                                </span>
+                                <span class="text-xs text-slate-400">שני - שישי</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">פעילויות, חופים, מופעי ענק ושופינג</h4>
+                            <p class="text-slate-600 text-sm mt-1">
+                                שמורת הפילים האתית, פארק האקסטרים ואומגות Hanuman World, מופע האורות והקסם Carnival Magic, מופע הקרקס האקסטרימי, שווקי לילה, וטיול יום לצ'או לאן / קאו סוק[cite: 2].
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Departure Day -->
+                    <div class="itin-item phuket relative flex items-start space-x-4 space-x-reverse">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-md z-10">
+                            10.10[cite: 1]
+                        </div>
+                        <div class="flex-grow bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-rose-50 text-rose-600 border border-rose-200">
+                                    <i class="fa-solid fa-plane-departure ml-1"></i> טיסה חזרה לישראל
+                                </span>
+                                <span class="text-xs text-slate-400">יום שבת</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-slate-900">צ'ק-אאוט ונסיעה לשדה התעופה בפוקט</h4>
+                            <p class="text-slate-600 text-sm mt-1">
+                                התארגנות ואריזות אחרונות. איסוף ב-<strong>18:30</strong> מהלובי של Phuket Marriott Merlin Beach לשדה התעופה בפוקט לקראת טיסת הלילה חזרה הביתה[cite: 1].
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 2: HOTELS & RESORTS (ריזורטים ומפות) -->
+            <section id="tab-hotels" class="tab-content hidden space-y-8">
                 <div>
-                    <h2 class="text-2xl font-bold text-slate-900">בתי המלון והמסלול</h2>
-                    <p class="text-sm text-slate-500">שלושת היעדים והריזורטים לאורך החופשה[cite: 1]</p>
+                    <h3 class="text-2xl font-bold text-slate-900">הריזורטים שלנו</h3>
+                    <p class="text-slate-500 text-sm">מידע מפורט, שירותים, מתקנים ומפות הריזורט</p>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Khao Lak Card -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
+                <!-- Hotel 1: JW Marriott Khao Lak -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="relative h-64 sm:h-80 bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1925&auto=format&fit=crop" alt="JW Marriott Khao Lak" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                            <div class="text-white">
+                                <span class="bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">קאו לאק • 23.09 - 27.09 (4 לילות)[cite: 1]</span>
+                                <h4 class="text-2xl sm:text-3xl font-extrabold mt-1">JW Marriott Khao Lak Resort & Spa</h4>[cite: 1]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            ריזורט 5 כוכבים יוקרתי השוכן על חוף Khuk Khak[cite: 1]. כולל את בריכת הלגונה הארוכה ביותר בדרום-מזרח אסיה (3.2 ק"מ) המתפתלת לאורך כל הריזורט, מתחם מגלשות מים ובריכת גלים לילדים, ומרכז שימור ימי ייחודי[cite: 1, 2].
+                        </p>
+                        
+                        <!-- Highlights Badges -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-water text-primary text-base block mb-1"></i> בריכת 3.2 ק"מ + גלים[cite: 1]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-fish text-tropical text-base block mb-1"></i> חוות כרישי במבוק[cite: 2]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-utensils text-sand text-base block mb-1"></i> 7 מסעדות וברים[cite: 2]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-spa text-sunset text-base block mb-1"></i> Quan Spa מפואר[cite: 1, 2]
+                            </div>
+                        </div>
+
+                        <!-- Interactive Resort Guide Box -->
+                        <div class="bg-sky-50/70 border border-sky-100 rounded-2xl p-4 space-y-3">
+                            <h5 class="font-bold text-sm text-sky-900 flex items-center gap-2">
+                                <i class="fa-solid fa-map-location-dot text-primary"></i> חלוקת האזורים בריזורט (לפי מפת המלון)[cite: 2]:
+                            </h5>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-sky-800">
+                                <div>• <strong>אגף המשפחות (Wings 1-3):</strong> בריכת גלים, מגלשות Aqua Play ומועדון הילדים[cite: 2].</div>
+                                <div>• <strong>אגף השקט (Wings 4-7):</strong> בריכות רגועות, ספא Quan ואזורי מנוחה[cite: 1, 2].</div>
+                                <div>• <strong>קולינריה:</strong> מסעדת Waterfront (ארוחת בוקר), Olive (איטלקית), Ta-Krai (תאילנדית), Sakura (יפנית)[cite: 1, 2].</div>
+                                <div>• <strong>פעילויות:</strong> השכרת קיאקים, גלשני פאדלבורד וסיורי שימור כרישים[cite: 2].</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <a href="https://maps.google.com/?q=JW+Marriott+Khao+Lak+Resort" target="_blank" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary/90 transition flex items-center gap-2">
+                                <i class="fa-solid fa-location-arrow"></i> נווט למלון ב-Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 2: Dusit Thani Krabi -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="relative h-64 sm:h-80 bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2070&auto=format&fit=crop" alt="Dusit Thani Krabi" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                            <div class="text-white">
+                                <span class="bg-tropical/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">קראבי • 27.09 - 02.10 (5 לילות)[cite: 1]</span>
+                                <h4 class="text-2xl sm:text-3xl font-extrabold mt-1">Dusit Thani Krabi Beach Resort</h4>[cite: 1]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            ממוקם ישירות על חוף Klong Muang המבודד והציורי[cite: 1]. שטח ענקי של גנים טרופיים, 2 בריכות שחייה ענקיות מול הים, גישה ישירה לחוף רחצה שקט וספורט ימי[cite: 1].
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-umbrella-beach text-sand text-base block mb-1"></i> חוף פרטי ושקט[cite: 1]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-water-ladder text-primary text-base block mb-1"></i> 2 בריכות חוף[cite: 1]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-child text-sunset text-base block mb-1"></i> Busy Bee Kids Club[cite: 1]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-leaf text-tropical text-base block mb-1"></i> גנים טרופיים ענקיים[cite: 1]
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <a href="https://maps.google.com/?q=Dusit+Thani+Krabi+Beach+Resort" target="_blank" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary/90 transition flex items-center gap-2">
+                                <i class="fa-solid fa-location-arrow"></i> נווט למלון ב-Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel 3: Phuket Marriott Merlin Beach -->
+                <div class="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition">
+                    <div class="relative h-64 sm:h-80 bg-slate-800">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080&auto=format&fit=crop" alt="Phuket Marriott Merlin Beach" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                            <div class="text-white">
+                                <span class="bg-sunset/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">פוקט • 02.10 - 10.10 (8 לילות)[cite: 1]</span>
+                                <h4 class="text-2xl sm:text-3xl font-extrabold mt-1">Phuket Marriott Resort & Spa, Merlin Beach</h4>[cite: 1]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            ממוקם על מפרץ פרטי ובלעדי (Tri-Trang / Merlin Beach) עם שונית אלמוגים טבעית לשנירקול, במרחק 5 דקות נסיעה ממרכז פטונג אך בשלווה מוחלטת[cite: 1]. כולל 3 בריכות לגונה מעוצבות, בר בתוך המים ומקלט פרפרים ייחודי.
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-semibold">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-mask-snorkel text-primary text-base block mb-1"></i> שונית אלמוגים לשנירקול
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-water text-tropical text-base block mb-1"></i> 3 בריכות לגונה[cite: 1]
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-cocktail text-sand text-base block mb-1"></i> Swim-up Pool Bar
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-shield-cat text-sunset text-base block mb-1"></i> שמורת פרפרים
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <a href="https://maps.google.com/?q=Phuket+Marriott+Resort+Merlin+Beach" target="_blank" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary/90 transition flex items-center gap-2">
+                                <i class="fa-solid fa-location-arrow"></i> נווט למלון ב-Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TAB 3: ATTRACTIONS CATALOG (קטלוג אטרקציות אינטראקטיבי) -->
+            <section id="tab-attractions" class="tab-content hidden space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                     <div>
-                        <div class="h-44 bg-slate-200 relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="JW Marriott" class="w-full h-full object-cover">
-                            <div class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                                4 לילות[cite: 1]
-                            </div>
-                        </div>
-                        <div class="p-6 space-y-3">
-                            <div class="text-xs text-amber-600 font-bold">23/09/2026 - 27/09/2026[cite: 1]</div>
-                            <h3 class="font-black text-xl text-slate-900">JW Marriott Khao Lak</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                חדר Deluxe Lagoon Pool Access עם גישה ישירה לבריכה[cite: 1]. בריכת ענק של 3.2 ק"מ, בריכת גלים, מגלשות ומתחם לילדים[cite: 1, 2].
-                            </p>
-                            <div class="text-xs text-slate-500 pt-2 border-t border-slate-100 flex items-center gap-1.5">
-                                <i class="fas fa-van-shuttle text-teal-600"></i>
-                                <span>הסעה פרטית: 23/09 בשעה 11:25 מנמל התעופה פוקט[cite: 1]</span>
-                            </div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900">אטרקציות וסיורים מומלצים</h3>
+                        <p class="text-slate-500 text-sm">סינון לפי אזור וסוג פעילות, סימון מועדפים ושמירה מקומית</p>
                     </div>
-                    <div class="p-6 pt-0 flex gap-2">
-                        <a href="https://maps.google.com/?q=JW+Marriott+Khao+Lak+Resort" target="_blank" class="flex-1 text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i> מפה
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=q-AhT1cSD-U" target="_blank" class="text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 px-3 rounded-xl transition">
-                            <i class="fab fa-youtube text-red-600"></i>[cite: 1]
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Krabi Card -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-200 relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Dusit Thani Krabi" class="w-full h-full object-cover">
-                            <div class="absolute top-3 right-3 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                                5 לילות[cite: 1]
-                            </div>
-                        </div>
-                        <div class="p-6 space-y-3">
-                            <div class="text-xs text-teal-600 font-bold">27/09/2026 - 02/10/2026[cite: 1]</div>
-                            <h3 class="font-black text-xl text-slate-900">Dusit Thani Krabi Beach</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                חדר Deluxe Sea Facing[cite: 1]. ממוקם בחוף קלונג מואנג הלבן והשקט, מוקף צמחייה טרופית, 2 בריכות שחייה וספא מפנק[cite: 1].
-                            </p>
-                            <div class="text-xs text-slate-500 pt-2 border-t border-slate-100 flex items-center gap-1.5">
-                                <i class="fas fa-van-shuttle text-teal-600"></i>
-                                <span>הסעה פרטית: 27/09 בשעה 12:00 מקאו לאק לקראבי[cite: 1]</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6 pt-0 flex gap-2">
-                        <a href="https://maps.google.com/?q=Dusit+Thani+Krabi+Beach+Resort" target="_blank" class="flex-1 text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i> מפה
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=5iyhtbNqKGo" target="_blank" class="text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 px-3 rounded-xl transition">
-                            <i class="fab fa-youtube text-red-600"></i>[cite: 1]
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Phuket Card -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 card-hover flex flex-col justify-between">
-                    <div>
-                        <div class="h-44 bg-slate-200 relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" alt="Phuket Marriott" class="w-full h-full object-cover">
-                            <div class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                                8 לילות[cite: 1]
-                            </div>
-                        </div>
-                        <div class="p-6 space-y-3">
-                            <div class="text-xs text-emerald-600 font-bold">02/10/2026 - 10/10/2026[cite: 1]</div>
-                            <h3 class="font-black text-xl text-slate-900">Phuket Marriott Merlin Beach</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                חדר Pool View (חדרים מקושרים)[cite: 1]. חוף פרטי שקט ומבודד 15 דקות מפטונג, 3 בריכות וחדר משחקים לילדים[cite: 1].
-                            </p>
-                            <div class="text-xs text-slate-500 pt-2 border-t border-slate-100 flex items-center gap-1.5">
-                                <i class="fas fa-van-shuttle text-teal-600"></i>
-                                <span>הסעה: 02/10 בשעה 12:00 מקראבי לפוקט • חזור לשדה ב-10/10 (18:30)[cite: 1]</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6 pt-0 flex gap-2">
-                        <a href="https://maps.google.com/?q=Phuket+Marriott+Resort+Merlin+Beach" target="_blank" class="flex-1 text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1"></i> מפה
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=C8KUtipORAQ" target="_blank" class="text-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 px-3 rounded-xl transition">
-                            <i class="fab fa-youtube text-red-600"></i>[cite: 1]
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 3: Interactive Attractions Catalog -->
-        <section class="space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900">אטרקציות ופעילויות מומלצות</h2>
-                    <p class="text-sm text-slate-500">סינון לפי יעד וסגנון, ושמירת מועדפים אישיים</p>
-                </div>
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap gap-2 text-xs font-semibold">
-                    <button onclick="filterAttractions('all')" class="filter-btn active bg-slate-900 text-white px-3.5 py-2 rounded-xl transition" data-filter="all">הכל</button>
-                    <button onclick="filterAttractions('khao-lak')" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl transition" data-filter="khao-lak">קאו לאק</button>
-                    <button onclick="filterAttractions('krabi')" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl transition" data-filter="krabi">קראבי</button>
-                    <button onclick="filterAttractions('phuket')" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl transition" data-filter="phuket">פוקט</button>
-                    <button onclick="filterAttractions('nature')" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl transition" data-filter="nature">טבע ומים</button>
-                    <button onclick="filterAttractions('kids')" class="filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl transition" data-filter="kids">משפחה וילדים</button>
-                </div>
-            </div>
-
-            <!-- Attractions Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="attractions-container">
-
-                <!-- 1. Andamanda -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="phuket" data-category="kids">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-lg">סגור מראש • 04.10[cite: 1]</span>
-                            <button onclick="toggleFav(this, 'andamanda')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">פארק המים Andamanda Phuket[cite: 1]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            פארק מים מרהיב וחדיש: מגלשות אקסטרים, נהר אבובים ארוך, בריכת גלים ענקית ומתחמי ילדים מושקעים[cite: 1].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>📍 <b>מיקום:</b> פוקט</div>
-                            <div>🕒 <b>משך:</b> יום שלם</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="font-bold text-emerald-600">כרטיסים נכללו בהזמנה[cite: 1]</span>
-                        <a href="https://andamandaphuket.com/" target="_blank" class="text-teal-600 hover:underline font-bold">לאתר הפארק &larr;</a>[cite: 1]
-                    </div>
-                </div>
-
-                <!-- 2. Elephant Sanctuary -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="phuket" data-category="kids nature">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg">פוקט • שמורה אתית[cite: 2]</span>
-                            <button onclick="toggleFav(this, 'elephants')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">שמורת פילים אתית בפוקט[cite: 2]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            מפגש מעצים ומלמד: הכנת פינוקי מזון טבעיים, האכלה מודרכת וסיור בג'ונגל ללא רכיבה או רחצה כפויה[cite: 2].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>⏱️ <b>משך:</b> 1.5 שעות[cite: 2]</div>
-                            <div>💵 <b>מחיר משוער:</b> ~108 ₪ לאדם[cite: 2]</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">מתאים לכל הגילאים[cite: 2]</span>
-                        <span class="text-teal-600 font-bold">מומלץ למשפחות</span>
-                    </div>
-                </div>
-
-                <!-- 3. Emerald Pool & Hot Springs -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="krabi" data-category="nature kids">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded-lg">קראבי • יום שלם[cite: 2]</span>
-                            <button onclick="toggleFav(this, 'emerald-pool')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">בריכת האזמרגד, מעיינות חמים ומקדש הנמר[cite: 1, 2]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            שחייה בבריכה טבעית בצבע ירוק-כחול בלב הג'ונגל, טבילה במעיינות החמים ותצפית מרהיבה ממקדש מערת הנמר[cite: 1, 2].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>⏱️ <b>משך:</b> יום שלם (9 שעות)[cite: 2]</div>
-                            <div>💵 <b>מחיר משוער:</b> ~116 ₪ לאדם[cite: 2]</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">כולל הסעות וארוחה[cite: 2]</span>
-                        <span class="text-teal-600 font-bold">חוויית טבע נדירה</span>
-                    </div>
-                </div>
-
-                <!-- 4. Hanuman World -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="phuket" data-category="kids">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-2.5 py-1 rounded-lg">פוקט • אקסטרים[cite: 2]</span>
-                            <button onclick="toggleFav(this, 'hanuman')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">אומגות ורכבת הרים Hanuman World[cite: 2]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            מעוף אומגות בין צמרות יער הגשם, גשרי שמיים, מסלול Luge ומגלשות רכבת הרים מפותלות מעל הנוף[cite: 2].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>⏱️ <b>משך:</b> 2-3 שעות[cite: 2]</div>
-                            <div>💵 <b>מחיר משוער:</b> 135-295 ₪[cite: 2]</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">גיל 4+ בלבד[cite: 2]</span>
-                        <span class="text-teal-600 font-bold">אדרנלין בשיא</span>
-                    </div>
-                </div>
-
-                <!-- 5. Samet Nangshe & Lam Pi -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="khao-lak" data-category="nature">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-lg">קאו לאק • חצי יום[cite: 2]</span>
-                            <button onclick="toggleFav(this, 'samet')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">תצפית סאמט נאנגשה ומפל לאם פי[cite: 1, 2]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            נקודת התצפית המרהיבה ביותר במפרץ פאנג נגה (180 מעלות של צוקי גיר) בשילוב שחייה מרעננת במפל לאם פי[cite: 1, 2].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>⏱️ <b>משך:</b> 4.5 שעות[cite: 2]</div>
-                            <div>💵 <b>מחיר משוער:</b> ~160 ₪ לאדם[cite: 2]</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">מתאים לכל הגילאים[cite: 2]</span>
-                        <span class="text-teal-600 font-bold">נוף עוצר נשימה</span>
-                    </div>
-                </div>
-
-                <!-- 6. Ao Thalane Kayaking -->
-                <div class="attraction-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between card-hover" data-region="krabi" data-category="nature">
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-start">
-                            <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded-lg">קראבי • חצי יום[cite: 2]</span>
-                            <button onclick="toggleFav(this, 'thalane')" class="fav-btn text-slate-300 hover:text-red-500 text-lg transition"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <h3 class="font-extrabold text-lg text-slate-900">שייט קיאקים במנגרובים של או ת'אלן[cite: 1, 2]</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            חתירה שלווה בין תעלות יער המנגרובים, קניוני סלע מרהיבים, לגונות נסתרות ומפגש עם קופים וציפורים[cite: 1, 2].
-                        </p>
-                        <div class="text-xs text-slate-500 space-y-1">
-                            <div>⏱️ <b>משך:</b> 4.5 שעות[cite: 2]</div>
-                            <div>💵 <b>מחיר משוער:</b> ~107 ₪ לאדם[cite: 2]</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">כולל איסוף וציוד[cite: 2]</span>
-                        <span class="text-teal-600 font-bold">חוויה פסטורלית</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Module 4: Tools (Currency Converter & Interactive Packing List) -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <!-- Packing Checklist -->
-            <div class="lg:col-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
-                    <div>
-                        <h3 class="text-xl font-bold text-slate-900">צ'ק-ליסט אריזה אינטראקטיבי</h3>
-                        <p class="text-xs text-slate-500">סמנו פריטים שנארזו (נשמר אוטומטית במכשיר)</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <input type="text" id="new-pack-item" placeholder="הוסף פריט חדש..." class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500">
-                        <button onclick="addPackItem()" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition">
-                            <i class="fas fa-plus"></i>
+                    <!-- Filter Pills -->
+                    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                        <button onclick="filterAttractions('all')" class="attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white" data-attr="all">הכל</button>
+                        <button onclick="filterAttractions('khaolak')" class="attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-attr="khaolak">קאו לאק</button>
+                        <button onclick="filterAttractions('krabi')" class="attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-attr="krabi">קראבי</button>
+                        <button onclick="filterAttractions('phuket')" class="attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200" data-attr="phuket">פוקט</button>
+                        <button onclick="filterAttractions('favorites')" class="attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200" data-attr="favorites">
+                            <i class="fa-solid fa-heart text-rose-500 ml-1"></i> מועדפים
                         </button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="packing-container">
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>דרכונים בתוקף (מעל 6 חודשים)[cite: 1]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>ביטוחי נסיעות מורחבים[cite: 2]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>בגדי ים, חולצות לייקרה וכובעים לילדים[cite: 2]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>כיסויים אטומים למים לטלפונים[cite: 2]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>ספריי יתושים וקרם הגנה[cite: 2]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>נעלי מים / סנדלי הליכה[cite: 2]</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>מטענים ניידים וכבלי טעינה</span>
-                    </label>
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center gap-3 border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                        <span>תיק תרופות ועזרה ראשונה לילדים</span>
-                    </label>
-                </div>
-            </div>
+                <!-- Attractions Grid -->
+                <div id="attractions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <!-- Currency & Useful Contacts -->
-            <div class="space-y-6">
-                <!-- Currency Converter -->
+                    <!-- Khao Lak 1: Samet Nangshe & Lampi Waterfall -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="khaolak" data-id="samet-nangshe">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Samet Nangshe">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">קאו לאק</span>
+                            <button onclick="toggleFavorite('samet-nangshe')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">תצפית סאמט נאנגשה ומפל לאם פי</h4>[cite: 1, 2]
+                                <p class="text-xs text-slate-500 mt-1">נוף פנורמי מהיפים בתאילנד מעל מפרץ פאנג נגה, בשילוב רחצה מרעננת במפל לאם פי בלב הג'ונגל[cite: 1, 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> חצי יום / יום שלם[cite: 2]</span>
+                                    <span class="font-semibold text-tropical">מתאים לכל הגילאים[cite: 2]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Krabi 1: Mangrove Kayaking -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="krabi" data-id="krabi-kayak">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Kayaking">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">קראבי</span>
+                            <button onclick="toggleFavorite('krabi-kayak')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">קיאקים במנגרובים (או ת'אלן / קלונג רוד)</h4>[cite: 1, 2]
+                                <p class="text-xs text-slate-500 mt-1">חוויית חתירה רגועה וקסומה בין יערות מנגרובים עתיקים, קניוני סלע קרסטיים ומים שקופים לחלוטין[cite: 1, 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3-4 שעות[cite: 2]</span>
+                                    <span class="font-semibold text-primary">חוויה משפחתית מומלצת[cite: 2]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Krabi 2: Emerald Pool & Hot Springs -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="krabi" data-id="emerald-pool">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Emerald Pool">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">קראבי</span>
+                            <button onclick="toggleFavorite('emerald-pool')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">בריכת האזמרגד, הלגונה הכחולה ומעיינות חמים</h4>[cite: 1, 2]
+                                <p class="text-xs text-slate-500 mt-1">שמורת טבע מדהימה עם שבילי הליכה בג'ונגל, רחצה בבריכה טבעית בצבע אזמרגד ומפלים של מים תרמיים חמים[cite: 1, 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום מלא[cite: 2]</span>
+                                    <span class="font-semibold text-tropical">כולל מקדש מערת הנמר[cite: 2]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phuket 1: Andamanda Waterpark -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border-2 border-primary/40 shadow-sm flex flex-col" data-region="phuket" data-id="andamanda">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1582650625119-3a31f841839d?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Andamanda Waterpark">
+                            <span class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow">סגור מראש ל-04.10![cite: 1]</span>
+                            <button onclick="toggleFavorite('andamanda')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">פארק המים Andamanda Phuket</h4>[cite: 1]
+                                <p class="text-xs text-slate-500 mt-1">הפארק הגדול והמתקדם ביותר בפוקט! 5 מתחמים מיתולוגיים, 12 מגלשות אקסטרים, בריכת גלים ענקית ומתחמי ילדים[cite: 1].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום מלא (10:00 - 19:00)</span>
+                                    <span class="font-semibold text-sunset">מומלץ להביא מגבות</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phuket 2: Ethical Elephant Sanctuary -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="elephant-sanctuary">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Elephant Sanctuary">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">פוקט</span>
+                            <button onclick="toggleFavorite('elephant-sanctuary')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">חוות פילים אתית (ללא רכיבה)</h4>[cite: 2]
+                                <p class="text-xs text-slate-500 mt-1">מפגש חינוכי ומרגש עם פילים שניצלו: הכנת מזון בריאות, האכלה ביד, רחצה בבוץ וליווי הפילים בטבע[cite: 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-4 שעות (בוקר/צהריים)</span>
+                                    <span class="font-semibold text-tropical">חובה לכל המשפחה[cite: 2]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phuket 3: Hanuman World Zipline -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="hanuman-world">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hanuman World">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">פוקט</span>
+                            <button onclick="toggleFavorite('hanuman-world')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">פארק האקסטרים והאומגות Hanuman World</h4>[cite: 2]
+                                <p class="text-xs text-slate-500 mt-1">אומגות מעל צמרות העצים, גשרי חבלים תלויים, ורכבת הרים ייחודית בתוך הג'ונגל (Roller Zipline)[cite: 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> כ-3 שעות[cite: 2]</span>
+                                    <span class="font-semibold text-sand">מגיל 4 ומעלה[cite: 2]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phuket 4: Carnival Magic -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="carnival-magic">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Carnival Magic">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">פוקט</span>
+                            <button onclick="toggleFavorite('carnival-magic')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">מופע האורות והקרנבל Carnival Magic</h4>[cite: 2]
+                                <p class="text-xs text-slate-500 mt-1">פארק נושא לילי מרהיב זוכה שיאי גינס: מיליוני נורות לד, תהלוכת ענק מרהיבה ומתחם קולינרי עשיר[cite: 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> ערב (17:30 - 22:30)[cite: 2]</span>
+                                    <span class="font-semibold text-primary">חוויה ויזואלית מטורפת</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Khao Sok Day Trip -->
+                    <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="khaolak" data-id="khao-sok">
+                        <div class="h-44 bg-slate-800 relative">
+                            <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Khao Sok">
+                            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">קאו לאק / פוקט</span>
+                            <button onclick="toggleFavorite('khao-sok')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
+                            <div>
+                                <h4 class="font-bold text-lg text-slate-900">שמורת קאו סוק ואגם צ'או לאן (Cheow Lan Lake)</h4>[cite: 2]
+                                <p class="text-xs text-slate-500 mt-1">שייט בסירת לונגטייל מסורתית בין צוקי גיר עוצרי נשימה המזדקרים מתוך מי טורקיז, רפטינג במבוק ומערות נטיפים[cite: 2].</p>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                                <div class="flex items-center justify-between text-slate-600">
+                                    <span><i class="fa-solid fa-clock ml-1 text-slate-400"></i> יום שלם[cite: 2]</span>
+                                    <span class="font-semibold text-tropical">טבע עוצר נשימה</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 4: TOOLS & EMERGENCY (מחשבון המרה, מילון, אנשי קשר והעלאה לדרייב) -->
+            <section id="tab-tools" class="tab-content hidden space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">כלים שימושיים ומרכז חירום</h3>
+                    <p class="text-slate-500 text-sm">העלאת מסמכים ל-Drive, ממיר מטבע מהיר, שיחון עברי-תאי ומספרי חירום</p>
+                </div>
+
+                <!-- Google Drive Upload Box -->
                 <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg">
-                            <i class="fas fa-calculator"></i>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                                <i class="fab fa-google-drive"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-base">העלאת מסמכים ישירות ל-Google Drive</h4>
+                                <p class="text-xs text-slate-500">שמירת צילומי דרכונים, ביטוחי נסיעות, כרטיסי טיסה ושוברים[cite: 1]</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">ממיר מטבע מהיר</h4>
-                            <p class="text-xs text-slate-500">1 ₪ ≈ 9.52 באט (1000฿ ≈ 105₪)</p>
-                        </div>
+                        <button onclick="openScriptModal()" class="self-start sm:self-auto px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-gear text-slate-400"></i> הגדרות חיבור
+                        </button>
                     </div>
-                    <div class="grid grid-cols-2 gap-3 pt-1">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1">באט (THB ฿)</label>
-                            <input type="number" id="thb-input" value="1000" oninput="calcCurrency('thb')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-1">
+                        <div class="lg:col-span-2 border-2 border-dashed border-slate-300 hover:border-primary rounded-2xl p-6 text-center transition bg-slate-50/50 hover:bg-white flex flex-col justify-center items-center cursor-pointer" onclick="document.getElementById('file-input').click()">
+                            <input type="file" id="file-input" class="hidden" multiple onchange="handleFileSelect(event)">
+                            <div class="w-10 h-10 bg-sky-50 text-primary rounded-full flex items-center justify-center text-lg mb-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-800 text-sm">לחצו לבחירת מסמך או גררו קבצים לכאן</h5>
+                            <p class="text-[11px] text-slate-500 mt-0.5">תומך ב-PDF, תמונות דרכון (JPG/PNG), שוברים וכו'[cite: 1]</p>
+                            <div id="upload-status" class="mt-2 text-xs font-semibold hidden"></div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1">שקלים (ILS ₪)</label>
-                            <input type="number" id="ils-input" value="105" oninput="calcCurrency('ils')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+
+                        <div class="bg-slate-50 rounded-2xl p-3 border border-slate-100 flex flex-col justify-between text-xs space-y-2">
+                            <div>
+                                <span class="text-slate-400 font-bold block mb-1">מסמכים אחרונים בטיול:</span>
+                                <div id="uploaded-files-list" class="space-y-1.5 max-h-32 overflow-y-auto pr-0.5">
+                                    <div class="p-2 bg-white rounded-xl flex items-center justify-between border border-slate-200">
+                                        <span class="truncate font-medium text-slate-700">📄 שובר_הזמנה_R126278.pdf[cite: 1]</span>
+                                        <span class="text-emerald-600 font-bold text-[10px]"><i class="fa-solid fa-check"></i> שמור</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-slate-400">הקבצים נשלחים ישירות לתיקיית הדרייב המוגדרת.</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Emergency Contacts -->
-                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-                    <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
-                        <i class="fas fa-phone-alt text-red-500"></i>
-                        <span>מוקדי חירום ושירות</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Currency Converter Tool -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <h4 class="font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-coins text-sand"></i> ממיר מטבע: שקל (ILS) ⇄ באט (THB)
+                            </h4>
+                            <span class="text-xs text-slate-400 font-mono">1 ₪ ≈ 9.60 ฿</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">סכום בבאט תאילנדי (THB ฿):</label>
+                                <div class="relative">
+                                    <input type="number" id="thb-input" value="1000" oninput="convertCurrency('thb')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:border-primary">
+                                    <span class="absolute left-3 top-2.5 text-slate-400 font-bold">฿</span>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center text-slate-400 text-sm">
+                                <i class="fa-solid fa-arrow-down-up-across-line"></i>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">שווה בערך בשקלים (ILS ₪):</label>
+                                <div class="relative">
+                                    <input type="number" id="ils-input" value="104.16" oninput="convertCurrency('ils')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-base font-bold text-slate-900 focus:outline-none focus:border-primary">
+                                    <span class="absolute left-3 top-2.5 text-slate-400 font-bold">₪</span>
+                                </div>
+                            </div>
+
+                            <!-- Quick Estimate Shortcuts -->
+                            <div class="pt-2 flex flex-wrap gap-2">
+                                <button onclick="setThb(100)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold text-slate-700">100฿ (~10₪)</button>
+                                <button onclick="setThb(500)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold text-slate-700">500฿ (~52₪)</button>
+                                <button onclick="setThb(1000)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold text-slate-700">1,000฿ (~104₪)</button>
+                                <button onclick="setThb(3000)" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-semibold text-slate-700">3,000฿ (~312₪)</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs font-bold">
-                        <a href="tel:*8880" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-100 text-slate-700 flex items-center gap-2 transition">
-                            <i class="fas fa-headset text-teal-600"></i>
-                            <span>מרכז למטייל (*8880)</span>[cite: 1]
-                        </a>
-                        <a href="tel:1155" class="p-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-100 text-slate-700 flex items-center gap-2 transition">
-                            <i class="fas fa-shield-alt text-blue-600"></i>
-                            <span>משטרת תיירים (1155)</span>
-                        </a>
+
+                    <!-- Emergency & Travel Contacts -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-phone-volume text-sunset"></i> אנשי קשר ומוקדי חירום
+                        </h4>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-rose-50 border border-rose-100">
+                                <div>
+                                    <span class="font-bold text-slate-900 block">המרכז למטייל תאילנד</span>
+                                    <span class="text-xs text-slate-500">שירות לקוחות, הזמנות וסיוע בעברית</span>
+                                </div>
+                                <a href="tel:*8880" class="px-3 py-1.5 bg-rose-600 text-white rounded-xl text-xs font-bold hover:bg-rose-700 transition">
+                                    חיוג: 8880*
+                                </a>[cite: 1]
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div>
+                                    <span class="font-bold text-slate-900 block">משטרת התיירים של תאילנד</span>
+                                    <span class="text-xs text-slate-500">מענה 24/7 באנגלית</span>
+                                </div>
+                                <a href="tel:1155" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">
+                                    1155
+                                </a>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div>
+                                    <span class="font-bold text-slate-900 block">אמבולנס וחירום רפואי</span>
+                                    <span class="text-xs text-slate-500">מוקד רפואי ארצי תאילנד</span>
+                                </div>
+                                <a href="tel:1669" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">
+                                    1669
+                                </a>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div>
+                                    <span class="font-bold text-slate-900 block">שגרירות ישראל בבנגקוק</span>
+                                    <span class="text-xs text-slate-500">חירום קונסולרי</span>
+                                </div>
+                                <a href="tel:+6622049200" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">
+                                    חייג לשגרירות
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Thai Phrasebook -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-language text-primary"></i> שיחון תאי שימושי למשפחה
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-xs">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">שלום / היי</span>
+                            <span class="font-bold text-slate-900 text-sm">סוואדי קראפ / קא</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">תודה רבה</span>
+                            <span class="font-bold text-slate-900 text-sm">קופ קון קראפ / קא</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">כמה זה עולה?</span>
+                            <span class="font-bold text-slate-900 text-sm">טאו ראי? (Tao Rai?)</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">לא חריף בכלל!</span>
+                            <span class="font-bold text-sunset text-sm">מאי פֶט (Mai Phet)</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">טעים מאוד</span>
+                            <span class="font-bold text-slate-900 text-sm">ארוי מאק (Aroy Mak)</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">החשבון בבקשה</span>
+                            <span class="font-bold text-slate-900 text-sm">צֶ'ק בּיל (Check Bin)</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">איפה השירותים?</span>
+                            <span class="font-bold text-slate-900 text-sm">הונג נאם יו תאי?</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block text-[10px]">הכל בסדר / אין בעיה</span>
+                            <span class="font-bold text-tropical text-sm">מאי פֶן רָאי (Mai Pen Rai)</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-        </section>
+            <!-- TAB 5: INTERACTIVE PACKING LIST (רשימת אריזה) -->
+            <section id="tab-packing" class="tab-content hidden space-y-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">צ'ק-ליסט אריזה אינטראקטיבי</h3>
+                        <p class="text-slate-500 text-sm">כל פריט שמסומן נשמר אוטומטית במכשיר שלכם</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetPackingList()" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold hover:bg-rose-50 hover:text-rose-600 transition">
+                            <i class="fa-solid fa-rotate-left ml-1"></i> איפוס סימונים
+                        </button>
+                    </div>
+                </div>
 
+                <!-- Add Custom Item Input -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2">
+                    <input type="text" id="custom-pack-item" placeholder="הוסיפו פריט משלכם לרשימה..." class="flex-grow bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-primary">
+                    <button onclick="addCustomPackingItem()" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary/90 transition flex-shrink-0">
+                        <i class="fa-solid fa-plus ml-1"></i> הוסף
+                    </button>
+                </div>
+
+                <!-- Categories Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="packing-grid">
+                    
+                    <!-- Documents & Money -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-passport text-primary"></i> מסמכים, כספים וביטוח
+                        </h4>
+                        <div class="space-y-2.5 text-sm" id="pack-cat-docs">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="passports" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>דרכונים (בתוקף ל-6 חודשים לפחות)</span>[cite: 1]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="insurance" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>פוליסות ביטוח נסיעות ורפואי מודפסות/בנייד</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="vouchers" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>וואוצ'רים למלונות, הסעות ופארק אנדמנדה</span>[cite: 1]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="cards" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>כרטיסי אשראי בינלאומיים + מזומן ראשוני</span>[cite: 1]
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clothing & Swimwear -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-shirt text-tropical"></i> ביגוד, ים ובריכה
+                        </h4>
+                        <div class="space-y-2.5 text-sm" id="pack-cat-clothes">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="swimsuits" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>בגדי ים (לפחות 2-3 סטים לכל אחד)</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="uv-shirts" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>חולצות מגן שמש (UV/Lycra) לילדים</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="aquashoes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>נעלי מים / סנדלים לפעילויות וסלעים</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="temple-clothes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>בגדים צנועים (מכסה כתפיים וברכיים) למקדשים</span>[cite: 2]
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Health & Protection -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-kit-medical text-sunset"></i> עזרה ראשונה והגנה
+                        </h4>
+                        <div class="space-y-2.5 text-sm" id="pack-cat-med">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="sunscreen" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>קרם הגנה בעל מקדם גבוה + אלוורה</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="mosquito" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>חומר דוחה יתושים טרופיים</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="kids-meds" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>תרופות קבועות + מורידי חום ומשככי כאבים לילדים</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="bandaids" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>פלסטרים עמידים למים וחומרי חיטוי</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Tech & Gadgets -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-mobile-screen-button text-sand"></i> גאדג'טים ואלקטרוניקה
+                        </h4>
+                        <div class="space-y-2.5 text-sm" id="pack-cat-tech">
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="waterproof-pouch" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>כיסויים אטומים למים לטלפונים</span>[cite: 2]
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="powerbanks" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>מטענים ניידים (Powerbanks) לטיולי יום</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="cables" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>כבלים ומפצלי טעינה לחדר</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+                                <input type="checkbox" onchange="savePackingState()" data-item="headphones" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                                <span>אוזניות וטאבלטים טעונים עם תכנים לילדים לטיסות</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
     </main>
+
+    <!-- Bottom Navigation Bar for Mobile -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 glass-nav border-t border-white/10 px-2 py-2 flex justify-around items-center text-slate-300 text-[10px] font-medium">
+        <button onclick="switchTab('itinerary')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn text-primary font-bold" data-tab="itinerary">
+            <i class="fa-solid fa-calendar-days text-base"></i>
+            <span>מסלול</span>
+        </button>
+        <button onclick="switchTab('hotels')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn" data-tab="hotels">
+            <i class="fa-solid fa-hotel text-base"></i>
+            <span>ריזורטים</span>
+        </button>
+        <button onclick="switchTab('attractions')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn" data-tab="attractions">
+            <i class="fa-solid fa-compass text-base"></i>
+            <span>אטרקציות</span>
+        </button>
+        <button onclick="switchTab('tools')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn" data-tab="tools">
+            <i class="fa-solid fa-calculator text-base"></i>
+            <span>כלים</span>
+        </button>
+        <button onclick="switchTab('packing')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn" data-tab="packing">
+            <i class="fa-solid fa-list-check text-base"></i>
+            <span>אריזה</span>
+        </button>
+    </nav>
 
     <!-- Modal for Drive Script Config -->
     <div id="script-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-4 text-right shadow-2xl">
             <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                <h4 class="text-lg font-bold text-slate-900">הגדרת חיבור ל-Google Drive</h4>
-                <button onclick="closeScriptModal()" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+                <h4 class="text-lg font-bold text-slate-900">הגדרת תיקיית Google Drive</h4>
+                <button onclick="closeScriptModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed">
-                הדבק כאן את כתובת ה-Web App שנוצרה ב-Google Apps Script כדי להעלות קבצים ישירות לתיקייה שלך:
+                הדבק כאן את כתובת ה-Web App שנוצרה ב-Google Apps Script (המקושרת לתיקייה שלך בדרייב) כדי להעלות קבצים ישירות מהאתר:
             </p>
             <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1">Google Apps Script Web App URL</label>
-                <input type="url" id="script-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <label class="block text-xs font-bold text-slate-700 mb-1">Google Apps Script Web App URL:</label>
+                <input type="url" id="script-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-primary">
             </div>
             <div class="flex justify-end gap-2 pt-3">
                 <button onclick="closeScriptModal()" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">ביטול</button>
-                <button onclick="saveScriptUrl()" class="px-4 py-2 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-xl transition">שמור הגדרות</button>
+                <button onclick="saveScriptUrl()" class="px-4 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/90 rounded-xl transition">שמור הגדרות</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Logic -->
     <script>
-        // 1. DUAL WORLD CLOCKS (Israel & Thailand)
-        function updateClocks() {
+        // --- 1. Tab Navigation System ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.className = "nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition active-tab text-white bg-primary shadow-sm";
+                } else {
+                    btn.className = "nav-btn px-4 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white";
+                }
+            });
+
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.className = "flex flex-col items-center gap-1 p-1 mobile-nav-btn text-primary font-bold";
+                } else {
+                    btn.className = "flex flex-col items-center gap-1 p-1 mobile-nav-btn text-slate-400";
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 2. Live Dual Clocks (Israel & Thailand) ---
+        function updateLiveClocks() {
             const now = new Date();
 
-            // Israel Time
             const israelTimeOpt = { timeZone: 'Asia/Jerusalem', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            const israelDateOpt = { timeZone: 'Asia/Jerusalem', weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' };
-            document.getElementById('israel-clock').innerText = now.toLocaleTimeString('he-IL', israelTimeOpt);
-            document.getElementById('israel-date').innerText = now.toLocaleDateString('he-IL', israelDateOpt);
+            const israelDateOpt = { timeZone: 'Asia/Jerusalem', day: '2-digit', month: '2-digit' };
+            document.getElementById('live-israel-clock').innerText = now.toLocaleTimeString('he-IL', israelTimeOpt);
+            document.getElementById('live-israel-date').innerText = now.toLocaleDateString('he-IL', israelDateOpt);
 
-            // Thailand Time (UTC+7)
             const thaiTimeOpt = { timeZone: 'Asia/Bangkok', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            const thaiDateOpt = { timeZone: 'Asia/Bangkok', weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric' };
-            document.getElementById('thai-clock').innerText = now.toLocaleTimeString('he-IL', thaiTimeOpt);
-            document.getElementById('thai-date').innerText = now.toLocaleDateString('he-IL', thaiDateOpt);
+            const thaiDateOpt = { timeZone: 'Asia/Bangkok', day: '2-digit', month: '2-digit' };
+            document.getElementById('live-thai-clock').innerText = now.toLocaleTimeString('he-IL', thaiTimeOpt);
+            document.getElementById('live-thai-date').innerText = now.toLocaleDateString('he-IL', thaiDateOpt);
         }
-        setInterval(updateClocks, 1000);
-        updateClocks();
+        setInterval(updateLiveClocks, 1000);
+        updateLiveClocks();
 
-        // 2. COUNTDOWN TIMER (23/09/2026 11:25)
-        const targetDate = new Date('2026-09-23T11:25:00+07:00').getTime();
-
+        // --- 3. Live Countdown Timer ---
         function updateCountdown() {
+            const targetDate = new Date('2026-09-23T11:25:00+07:00').getTime();
             const now = new Date().getTime();
             const diff = targetDate - now;
 
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days;
-                document.getElementById('hours').innerText = hours;
-                document.getElementById('minutes').innerText = minutes;
-                document.getElementById('seconds').innerText = seconds;
+            if (diff <= 0) {
+                document.getElementById('cd-days').innerText = '00';
+                document.getElementById('cd-hours').innerText = '00';
+                document.getElementById('cd-minutes').innerText = '00';
+                document.getElementById('cd-seconds').innerText = '00';
+                return;
             }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // 3. CURRENCY CONVERTER
-        const RATE = 9.52;
-
-        function calcCurrency(source) {
-            const thb = document.getElementById('thb-input');
-            const ils = document.getElementById('ils-input');
-
-            if (source === 'thb') {
-                const v = parseFloat(thb.value) || 0;
-                ils.value = (v / RATE).toFixed(1);
-            } else {
-                const v = parseFloat(ils.value) || 0;
-                thb.value = Math.round(v * RATE);
-            }
-        }
-
-        // 4. ATTRACTION FILTERING & FAVORITES
-        function filterAttractions(filter) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white', 'active');
-                btn.classList.add('bg-white', 'text-slate-700');
-            });
-            event.target.classList.add('bg-slate-900', 'text-white', 'active');
-            event.target.classList.remove('bg-white', 'text-slate-700');
-
-            document.querySelectorAll('.attraction-card').forEach(card => {
-                const reg = card.getAttribute('data-region');
-                const cat = card.getAttribute('data-category') || '';
-
-                if (filter === 'all' || reg === filter || cat.includes(filter)) {
-                    card.style.display = 'flex';
+        // --- 4. Itinerary Filters ---
+        function filterItinerary(dest) {
+            document.querySelectorAll('.itin-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === dest) {
+                    btn.className = "itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white";
                 } else {
-                    card.style.display = 'none';
+                    btn.className = "itin-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200";
+                }
+            });
+
+            document.querySelectorAll('.itin-item').forEach(item => {
+                if (dest === 'all' || item.classList.contains(dest)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
                 }
             });
         }
 
-        function toggleFav(btn, id) {
-            const isFav = btn.classList.contains('text-red-500');
-            if (isFav) {
-                btn.classList.remove('text-red-500');
-                btn.classList.add('text-slate-300');
-                localStorage.removeItem('fav_trip_' + id);
+        // --- 5. Attractions Filters & Favorites (localStorage) ---
+        const FAVORITES_KEY = 'thailand_trip_favorites_2026';
+
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+        }
+
+        function toggleFavorite(id) {
+            let favs = getFavorites();
+            if (favs.includes(id)) {
+                favs = favs.filter(item => item !== id);
             } else {
-                btn.classList.add('text-red-500');
-                btn.classList.remove('text-slate-300');
-                localStorage.setItem('fav_trip_' + id, 'true');
+                favs.push(id);
+            }
+            localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+            renderFavoritesUI();
+        }
+
+        function renderFavoritesUI() {
+            const favs = getFavorites();
+            document.querySelectorAll('.attr-card').forEach(card => {
+                const id = card.getAttribute('data-id');
+                const btn = card.querySelector('.fav-btn');
+                if (btn) {
+                    if (favs.includes(id)) {
+                        btn.innerHTML = '<i class="fa-solid fa-heart text-rose-500"></i>';
+                    } else {
+                        btn.innerHTML = '<i class="fa-regular fa-heart text-slate-600"></i>';
+                    }
+                }
+            });
+        }
+
+        function filterAttractions(category) {
+            document.querySelectorAll('.attr-btn').forEach(btn => {
+                if (btn.getAttribute('data-attr') === category) {
+                    btn.className = "attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-900 text-white";
+                } else if (btn.getAttribute('data-attr') === 'favorites') {
+                    btn.className = "attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200";
+                } else {
+                    btn.className = "attr-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200";
+                }
+            });
+
+            const favs = getFavorites();
+            document.querySelectorAll('.attr-card').forEach(card => {
+                const region = card.getAttribute('data-region');
+                const id = card.getAttribute('data-id');
+
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else if (category === 'favorites') {
+                    card.style.display = favs.includes(id) ? 'flex' : 'none';
+                } else {
+                    card.style.display = (region === category) ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // --- 6. Currency Converter ---
+        const RATE_THB_TO_ILS = 0.10416;
+        const RATE_ILS_TO_THB = 9.60;
+
+        function convertCurrency(source) {
+            const thbInput = document.getElementById('thb-input');
+            const ilsInput = document.getElementById('ils-input');
+
+            if (source === 'thb') {
+                const thb = parseFloat(thbInput.value) || 0;
+                ilsInput.value = (thb * RATE_THB_TO_ILS).toFixed(2);
+            } else {
+                const ils = parseFloat(ilsInput.value) || 0;
+                thbInput.value = (ils * RATE_ILS_TO_THB).toFixed(0);
             }
         }
 
-        // 5. PACKING LIST
-        function savePacking() {
-            const items = Array.from(document.querySelectorAll('.pack-checkbox')).map(cb => ({
-                text: cb.nextElementSibling.innerText,
-                checked: cb.checked
-            }));
-            localStorage.setItem('thailand_packing', JSON.stringify(items));
+        function setThb(amount) {
+            document.getElementById('thb-input').value = amount;
+            convertCurrency('thb');
         }
 
-        function loadPacking() {
-            const saved = localStorage.getItem('thailand_packing');
-            if (!saved) return;
-            const items = JSON.parse(saved);
-            const container = document.getElementById('packing-container');
-            if (items.length > 0) {
-                container.innerHTML = items.map((item, idx) => `
-                    <label class="p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center justify-between border border-slate-100 cursor-pointer text-xs font-medium transition">
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded" ${item.checked ? 'checked' : ''}>
-                            <span class="${item.checked ? 'line-through text-slate-400' : 'text-slate-700'}">${item.text}</span>
-                        </div>
-                        <button onclick="removePackItem(event, ${idx})" class="text-slate-300 hover:text-red-500 px-1 text-sm"><i class="fas fa-times"></i></button>
-                    </label>
-                `).join('');
-            }
+        // --- 7. Packing List State & LocalStorage ---
+        const PACKING_KEY = 'thailand_trip_packing_state_2026';
+        const CUSTOM_PACK_KEY = 'thailand_trip_custom_packing_2026';
+
+        function loadPackingState() {
+            const state = JSON.parse(localStorage.getItem(PACKING_KEY) || '{}');
+            document.querySelectorAll('.pack-checkbox').forEach(cb => {
+                const item = cb.getAttribute('data-item');
+                if (state[item]) {
+                    cb.checked = true;
+                }
+            });
+
+            const customItems = JSON.parse(localStorage.getItem(CUSTOM_PACK_KEY) || '[]');
+            customItems.forEach(itemText => {
+                renderCustomItemElement(itemText);
+            });
         }
 
-        function addPackItem() {
-            const input = document.getElementById('new-pack-item');
-            const val = input.value.trim();
-            if (!val) return;
-            const container = document.getElementById('packing-container');
-            const newLabel = document.createElement('label');
-            newLabel.className = "p-3 bg-slate-50 hover:bg-slate-100 rounded-2xl flex items-center justify-between border border-slate-100 cursor-pointer text-xs font-medium transition";
-            newLabel.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <input type="checkbox" onchange="savePacking()" class="pack-checkbox w-4 h-4 text-teal-600 rounded">
-                    <span>${val}</span>
-                </div>
-            `;
-            container.prepend(newLabel);
+        function savePackingState() {
+            const state = {};
+            document.querySelectorAll('.pack-checkbox').forEach(cb => {
+                const item = cb.getAttribute('data-item');
+                state[item] = cb.checked;
+            });
+            localStorage.setItem(PACKING_KEY, JSON.stringify(state));
+        }
+
+        function addCustomPackingItem() {
+            const input = document.getElementById('custom-pack-item');
+            const text = input.value.trim();
+            if (!text) return;
+
+            renderCustomItemElement(text);
+
+            const customItems = JSON.parse(localStorage.getItem(CUSTOM_PACK_KEY) || '[]');
+            customItems.push(text);
+            localStorage.setItem(CUSTOM_PACK_KEY, JSON.stringify(customItems));
+
             input.value = '';
-            savePacking();
+            savePackingState();
         }
 
-        function removePackItem(e, idx) {
-            e.preventDefault();
-            e.stopPropagation();
-            let items = JSON.parse(localStorage.getItem('thailand_packing') || '[]');
-            items.splice(idx, 1);
-            localStorage.setItem('thailand_packing', JSON.stringify(items));
-            loadPacking();
+        function renderCustomItemElement(text) {
+            const id = 'custom_' + encodeURIComponent(text);
+            const container = document.getElementById('pack-cat-docs');
+            const label = document.createElement('label');
+            label.className = "flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition";
+            label.innerHTML = `
+                <input type="checkbox" onchange="savePackingState()" data-item="${id}" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary">
+                <span>${text}</span>
+            `;
+            container.appendChild(label);
         }
 
-        // 6. DRIVE SCRIPT MODAL & UPLOAD
+        function resetPackingList() {
+            if (confirm('האם לאפס את כל הסימונים ברשימת האריזה?')) {
+                localStorage.removeItem(PACKING_KEY);
+                document.querySelectorAll('.pack-checkbox').forEach(cb => cb.checked = false);
+            }
+        }
+
+        // --- 8. Google Drive Script Upload Logic ---
         function openScriptModal() {
-            document.getElementById('script-url-input').value = localStorage.getItem('gdrive_url') || '';
+            document.getElementById('script-url-input').value = localStorage.getItem('thailand_gdrive_url') || '';
             document.getElementById('script-modal').classList.remove('hidden');
         }
+
         function closeScriptModal() {
             document.getElementById('script-modal').classList.add('hidden');
         }
+
         function saveScriptUrl() {
             const url = document.getElementById('script-url-input').value.trim();
-            localStorage.setItem('gdrive_url', url);
+            localStorage.setItem('thailand_gdrive_url', url);
             closeScriptModal();
-            alert('הגדרות החיבור נשמרו!');
+            alert('הגדרות החיבור ל-Google Drive נשמרו!');
         }
 
         function handleFileSelect(e) {
             const files = e.target.files;
             if (!files.length) return;
-            const scriptUrl = localStorage.getItem('gdrive_url');
+
+            const scriptUrl = localStorage.getItem('thailand_gdrive_url');
             const status = document.getElementById('upload-status');
             status.classList.remove('hidden', 'text-red-500', 'text-emerald-600');
-            status.classList.add('text-teal-600');
-            status.innerText = `מעלה ${files.length} קבצים...`;
+            status.classList.add('text-primary');
+            status.innerText = `מעלה ${files.length} קבצים ל-Google Drive...`;
 
             Array.from(files).forEach(file => {
                 const reader = new FileReader();
@@ -716,27 +1326,31 @@
                     if (scriptUrl) {
                         fetch(scriptUrl, {
                             method: 'POST',
-                            body: JSON.stringify({ fileName: file.name, mimeType: file.type, fileBase64: base64 })
+                            body: JSON.stringify({
+                                fileName: file.name,
+                                mimeType: file.type,
+                                fileBase64: base64
+                            })
                         })
                         .then(res => res.json())
                         .then(() => {
-                            status.classList.remove('text-teal-600');
+                            status.classList.remove('text-primary');
                             status.classList.add('text-emerald-600');
                             status.innerText = 'הקובץ הועלה בהצלחה ל-Google Drive!';
-                            addDocToList(file.name);
+                            addDocItem(file.name);
                         })
                         .catch(() => {
-                            status.classList.remove('text-teal-600');
+                            status.classList.remove('text-primary');
                             status.classList.add('text-emerald-600');
-                            status.innerText = 'הקובץ נשמר מקומית בדפדפן!';
-                            addDocToList(file.name);
+                            status.innerText = 'הקובץ נשמר מקומית!';
+                            addDocItem(file.name);
                         });
                     } else {
                         setTimeout(() => {
-                            status.classList.remove('text-teal-600');
+                            status.classList.remove('text-primary');
                             status.classList.add('text-emerald-600');
-                            status.innerText = 'הקובץ נוסף לרשימה!';
-                            addDocToList(file.name);
+                            status.innerText = 'הקובץ נוסף לרשימה! (לחץ על "הגדרות חיבור" לחיבור ה-Drive)';
+                            addDocItem(file.name);
                         }, 500);
                     }
                 };
@@ -744,40 +1358,32 @@
             });
         }
 
-        function addDocToList(name) {
-            let files = JSON.parse(localStorage.getItem('trip_docs') || '[]');
-            files.unshift(name);
-            localStorage.setItem('trip_docs', JSON.stringify(files));
-            loadDocs();
+        function addDocItem(name) {
+            let docs = JSON.parse(localStorage.getItem('thailand_docs_vault') || '[]');
+            docs.unshift(name);
+            localStorage.setItem('thailand_docs_vault', JSON.stringify(docs));
+            loadDocsVault();
         }
 
-        function loadDocs() {
+        function loadDocsVault() {
             const listEl = document.getElementById('uploaded-files-list');
-            let files = JSON.parse(localStorage.getItem('trip_docs') || '[]');
-            if (files.length > 0) {
-                const html = files.map(name => `
-                    <div class="p-2.5 bg-white rounded-xl flex items-center justify-between border border-slate-200">
+            let docs = JSON.parse(localStorage.getItem('thailand_docs_vault') || '[]');
+            if (docs.length > 0) {
+                const html = docs.map(name => `
+                    <div class="p-2 bg-white rounded-xl flex items-center justify-between border border-slate-200">
                         <span class="truncate font-medium text-slate-700">📄 ${name}</span>
-                        <span class="text-emerald-600 font-semibold text-[11px]"><i class="fas fa-check-circle"></i> נשמר</span>
+                        <span class="text-emerald-600 font-bold text-[10px]"><i class="fa-solid fa-check"></i> נשמר</span>
                     </div>
                 `).join('');
                 listEl.innerHTML = html + listEl.innerHTML;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPacking();
-            loadDocs();
-            document.querySelectorAll('.fav-btn').forEach(btn => {
-                const str = btn.getAttribute('onclick');
-                if (str) {
-                    const id = str.split("'")[3];
-                    if (localStorage.getItem('fav_trip_' + id) === 'true') {
-                        btn.classList.add('text-red-500');
-                        btn.classList.remove('text-slate-300');
-                    }
-                }
-            });
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFavoritesUI();
+            loadPackingState();
+            loadDocsVault();
         });
     </script>
 </body>
