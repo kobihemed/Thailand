@@ -1324,7 +1324,7 @@
         // ==========================================
         // כתובת ה-GOOGLE APPS SCRIPT מוטמעת קשיח כאן
         // ==========================================
-        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUxleUr9vibIv1iy1fn4QNw-lx-T9RLtlOQsUsFLV_iF0rBknrzggYHv4RM4k611g/exec";
+        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwn_YSDpOlwbFcP6v2ht7re-m7b_qdcXkGzlPEgeK4YaYFQB8quCMDmwudK5cMxWEy9/exec";
 
         // ==========================================
         // הגדרת פרופילים וקודי PIN
@@ -1453,7 +1453,6 @@
         function confirmDeleteFile() {
             const enteredPin = document.getElementById('delete-pin-input').value.trim();
             
-            // בדיקה האם הקוד תואם למנהל או לבעל הקובץ
             const adminPin = PROFILES.ADMIN.pin;
             const ownerPin = PROFILES[fileTagToDelete] ? PROFILES[fileTagToDelete].pin : null;
 
@@ -1485,7 +1484,6 @@
                 }
             })
             .catch(() => {
-                // מחיקה מקומית במקרה של תקלת תקשורת
                 allDriveFiles = allDriveFiles.filter(f => f.id !== fileId);
                 localStorage.setItem('thailand_docs_vault', JSON.stringify(allDriveFiles));
                 renderFilteredDocs();
@@ -1863,16 +1861,12 @@
             listEl.innerHTML = filtered.map(doc => {
                 const name = doc.name || '';
                 let badgeHtml = '';
-                let tag = 'GENERAL';
 
                 if (name.startsWith('[HEMED]')) {
-                    tag = 'HEMED';
                     badgeHtml = '<span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold ml-1">חמד</span>';
                 } else if (name.startsWith('[MORGEN]')) {
-                    tag = 'MORGEN';
                     badgeHtml = '<span class="text-[9px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold ml-1">מורגנשטרן</span>';
                 } else if (name.startsWith('[GRAND]')) {
-                    tag = 'GRAND';
                     badgeHtml = '<span class="text-[9px] bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded font-bold ml-1">סבא/סבתא</span>';
                 } else {
                     badgeHtml = '<span class="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-bold ml-1">כללי</span>';
