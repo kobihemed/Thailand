@@ -1324,7 +1324,7 @@
         // ==========================================
         // כתובת ה-GOOGLE APPS SCRIPT מוטמעת קשיח כאן
         // ==========================================
-        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwn_YSDpOlwbFcP6v2ht7re-m7b_qdcXkGzlPEgeK4YaYFQB8quCMDmwudK5cMxWEy9/exec";
+        const GOOGLE_DRIVE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRu4ftil7A0jB7K7MmutVGX1vX8wVclGTcyoeywHBiwh-YejvME76dAmw_qyjQDpwO/exec";
 
         // ==========================================
         // הגדרת פרופילים וקודי PIN
@@ -1456,7 +1456,7 @@
             const adminPin = PROFILES.ADMIN.pin;
             const ownerPin = PROFILES[fileTagToDelete] ? PROFILES[fileTagToDelete].pin : null;
 
-            if (enteredPin === adminPin || (ownerPin && enteredPin === ownerPin)) {
+            if (enteredPin === adminPin || (ownerPin && enteredPin === ownerPin) || (currentProfile === 'ADMIN' && enteredPin === adminPin)) {
                 closeDeleteModal();
                 executeDeleteFile(fileIdToDelete);
             } else {
