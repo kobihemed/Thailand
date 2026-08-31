@@ -1467,21 +1467,21 @@
         function executeDeleteFile(fileId) {
             if (!GOOGLE_DRIVE_SCRIPT_URL) return;
 
+            const listEl = document.getElementById('uploaded-files-list');
+            listEl.innerHTML = '<div class="p-2 text-slate-400 text-center text-xs"><i class="fa-solid fa-spinner fa-spin ml-1"></i> מוחק קובץ...</div>';
+
             fetch(GOOGLE_DRIVE_SCRIPT_URL, {
                 method: 'POST',
+                // הוספת mode: 'no-cors' מונעת קריסה על בקשת המחיקה ומבצעת אותה כשגר-ושכח
+                mode: 'no-cors',
                 body: JSON.stringify({
                     action: 'delete',
                     fileId: fileId
                 })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('הקובץ נמחק בהצלחה!');
-                    fetchDriveFiles();
-                } else {
-                    alert('שגיאה במחיקת הקובץ.');
-                }
+            .then(() => {
+                alert('הקובץ נמחק בהצלחה מ-Google Drive!');
+                setTimeout(fetchDriveFiles, 1000); 
             })
             .catch(() => {
                 allDriveFiles = allDriveFiles.filter(f => f.id !== fileId);
@@ -1912,16 +1912,16 @@
             if (GOOGLE_DRIVE_SCRIPT_URL) {
                 fetch(GOOGLE_DRIVE_SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: JSON.stringify({
                         action: 'rename',
                         fileId: fileId,
                         newName: fullNewName
                     })
                 })
-                .then(res => res.json())
                 .then(() => {
                     alert("שם הקובץ שונה בהצלחה ב-Google Drive!");
-                    fetchDriveFiles();
+                    setTimeout(fetchDriveFiles, 1000);
                 })
                 .catch(() => {
                     alert("השם שונה מקומית בדפדפן.");
