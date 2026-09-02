@@ -206,7 +206,7 @@
                     </div>
                 </div>
 
-                <!-- טבלת לו"ז מרוכזת (מתוך ה-PDF) -->
+                <!-- טבלת לו"ז מרוכזת -->
                 <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200 mb-8">
                     <table class="w-full text-sm text-right">
                         <thead class="bg-slate-100 text-slate-700">
@@ -1118,11 +1118,10 @@
                                     <span class="text-slate-500 font-bold block" id="profile-files-header">קבצים עבור פרופיל:</span>
                                     <span id="files-count-badge" class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-bold">0 קבצים</span>
                                 </div>
-                                <div id="uploaded-files-list" class="space-y-1.5 max-h-44 overflow-y-auto pr-0.5">
+                                <div id="uploaded-files-list" class="max-h-72 overflow-y-auto pr-1 space-y-2">
                                     <div class="p-2 text-slate-400 text-center text-xs">טוען קבצים מהדרייב...</div>
                                 </div>
                             </div>
-                            <span class="text-[10px] text-slate-400">👁️ צפייה | ✏️ שינוי שם | 🗑️ מחיקה | ⬇️ הורדה</span>
                         </div>
                     </div>
                 </div>
@@ -1402,7 +1401,7 @@
                 <button onclick="closeDeleteModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <p class="text-xs text-slate-600" id="delete-modal-text">
-                הזן קוד PIN של מנהל (9999) או קוד PIN של בעל הקובץ כדי לאשר את המחיקה:
+                הזן קוד PIN של מנהל (9999) או קוד PIN של בעל הקובץ כדי למחוק:
             </p>
             <div class="space-y-3 text-xs">
                 <div>
@@ -1558,7 +1557,7 @@
 
             document.getElementById('delete-pin-input').value = '';
             document.getElementById('delete-pin-error').classList.add('hidden');
-            document.getElementById('delete-modal-text').innerText = `למחיקת הקובץ נדרש קוד PIN של מנהל (9999) או קוד PIN של בעל הקובץ:`;
+            document.getElementById('delete-modal-text').innerText = `למחיקת הקובץ נדרש קוד PIN של מנהל או קוד PIN של בעל הקובץ:`;
             document.getElementById('delete-pin-modal').classList.remove('hidden');
         }
 
@@ -1571,7 +1570,7 @@
         function confirmDeleteFile() {
             const enteredPin = document.getElementById('delete-pin-input').value.trim();
             
-            const adminPin = PROFILES.ADMIN.pin;
+            const adminPin = PROFILES.ADMIN.pin; 
             const ownerPin = PROFILES[fileTagToDelete] ? PROFILES[fileTagToDelete].pin : null;
 
             if (enteredPin === adminPin || (ownerPin && enteredPin === ownerPin) || (currentProfile === 'ADMIN' && enteredPin === adminPin)) {
@@ -1982,39 +1981,47 @@
                 let badgeHtml = '';
 
                 if (name.startsWith('[HEMED]')) {
-                    badgeHtml = '<span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold ml-1">חמד</span>';
+                    badgeHtml = '<span class="inline-block text-[10px] bg-sky-100 text-sky-800 px-2 py-0.5 rounded-md font-bold mt-1">משפחת חמד</span>';
                 } else if (name.startsWith('[MORGEN]')) {
-                    badgeHtml = '<span class="text-[9px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold ml-1">מורגנשטרן</span>';
+                    badgeHtml = '<span class="inline-block text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md font-bold mt-1">מורגנשטרן</span>';
                 } else if (name.startsWith('[GRAND]')) {
-                    badgeHtml = '<span class="text-[9px] bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded font-bold ml-1">סבא/סבתא</span>';
+                    badgeHtml = '<span class="inline-block text-[10px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded-md font-bold mt-1">סבא וסבתא</span>';
                 } else {
-                    badgeHtml = '<span class="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-bold ml-1">כללי</span>';
+                    badgeHtml = '<span class="inline-block text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-bold mt-1">כללי (לכולם)</span>';
                 }
 
                 const cleanName = name.replace(/^\[(HEMED|MORGEN|GRAND|GENERAL)\]\s*/, '');
 
                 return `
-                <div class="p-2 bg-white rounded-xl flex items-center justify-between border border-slate-200 hover:border-slate-300 transition">
-                    <div class="flex items-center overflow-hidden max-w-[100px] sm:max-w-[120px]">
-                        <span class="truncate font-medium text-slate-700 text-xs" title="${name}">📄 ${cleanName}</span>
-                        ${currentProfile === 'ADMIN' ? badgeHtml : ''}
+                <div class="p-3 bg-white rounded-2xl flex flex-col gap-2 border border-slate-200 hover:border-primary/30 transition shadow-sm mb-2 last:mb-0">
+                    <div class="flex items-start gap-2.5">
+                        <div class="mt-0.5 w-6 h-6 shrink-0 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center">
+                            <i class="fa-regular fa-file-lines text-xs"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <p class="font-bold text-slate-700 text-xs leading-tight break-words" style="word-break: break-word;">${cleanName}</p>
+                            ${currentProfile === 'ADMIN' ? badgeHtml : ''}
+                        </div>
                     </div>
-                    <div class="flex items-center gap-1 flex-shrink-0">
-                        <button onclick="previewFile('${encodeURIComponent(cleanName)}', '${doc.viewUrl || doc.downloadUrl}')" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition" title="צפייה">
-                            <i class="fa-solid fa-eye"></i>
+                    <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 mt-1">
+                        <button onclick="previewFile('${encodeURIComponent(cleanName)}', '${doc.viewUrl || doc.downloadUrl}')" class="flex-grow flex items-center justify-center gap-1.5 px-2 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">
+                            <i class="fa-solid fa-eye"></i> צפייה
                         </button>
-                        <button onclick="renameDriveFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-bold transition" title="שנה שם">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button onclick="promptDeleteFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-xs font-bold transition" title="מחיקה">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                        <a href="${doc.downloadUrl || doc.viewUrl}" target="_blank" download="${cleanName}" class="px-2 py-1 bg-sky-50 hover:bg-sky-100 text-primary rounded-lg text-xs font-bold transition flex items-center" title="הורדה">
-                            <i class="fa-solid fa-download"></i>
-                        </a>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="renameDriveFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="w-8 h-8 flex items-center justify-center bg-amber-50 hover:bg-amber-100 text-amber-600 rounded-xl text-xs transition" title="שנה שם">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <a href="${doc.downloadUrl || doc.viewUrl}" target="_blank" download="${cleanName}" class="w-8 h-8 flex items-center justify-center bg-sky-50 hover:bg-sky-100 text-primary rounded-xl text-xs transition" title="הורדה">
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+                            <button onclick="promptDeleteFile('${doc.id}', '${encodeURIComponent(doc.name)}')" class="w-8 h-8 flex items-center justify-center bg-rose-50 hover:bg-rose-100 text-rose-500 rounded-xl text-xs transition" title="מחיקה">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            `}).join('');
+                `;
+            }).join('');
         }
 
         function renameDriveFile(fileId, encodedCurrentName) {
