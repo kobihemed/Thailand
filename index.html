@@ -827,7 +827,7 @@
 
                     <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="hanuman-world">
                         <div class="h-44 bg-slate-800 relative">
-                            <img src="https://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/o4k9x0jyhxveqkbeqrui.jpg" class="w-full h-full object-cover" alt="Hanuman World">
+                            <img src="https://img.avianexperiences.com/attractions/82ff880e-535b-4e53-a039-733862a79b3d" class="w-full h-full object-cover" alt="Hanuman World">
                             <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">פוקט</span>
                             <button onclick="toggleFavorite('hanuman-world')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
                                 <i class="fa-regular fa-heart"></i>
@@ -1273,9 +1273,38 @@
 
             <!-- TAB 6: TOOLS & EMERGENCY -->
             <section id="tab-tools" class="tab-content hidden space-y-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-slate-900">כלים, מידע שימושי ומרכז חירום</h3>
-                    <p class="text-slate-500 text-sm">אתר ההזמנה, מרכז המסמכים ב-Drive, שיחון ומספרי חירום</p>
+                <!-- Tide Forecast Tool (Moved here to fill space) -->
+                <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-3xl p-6 border border-cyan-100 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-cyan-200 pb-3">
+                        <h4 class="font-bold text-cyan-900 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-water text-cyan-600"></i> מצב הים וזמני גאות ושפל
+                        </h4>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        בדרום תאילנד (פוקט וקראבי) יש הבדל עצום בין גאות לשפל. לפני שיוצאים לקיאקים או לשנורקלינג בשונית של מריוט מרלין ביץ', <strong>חובה לבדוק מתי המים גבוהים!</strong> בשעות השפל הים נסוג מאוד לאחור וחושף סלעים.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <a href="https://www.tide-forecast.com/locations/Krabi/tides/latest" target="_blank" class="bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl py-2.5 px-3 text-center text-xs font-bold transition flex flex-col items-center gap-1 shadow-sm">
+                            <i class="fa-solid fa-arrow-up-right-from-square mb-1"></i>
+                            מצב הים בקראבי
+                        </a>
+                        <a href="https://www.tide-forecast.com/locations/Phuket/tides/latest" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-2.5 px-3 text-center text-xs font-bold transition flex flex-col items-center gap-1 shadow-sm">
+                            <i class="fa-solid fa-arrow-up-right-from-square mb-1"></i>
+                            מצב הים בפוקט
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">כלים, מידע שימושי ומרכז חירום</h3>
+                        <p class="text-slate-500 text-sm">אתר ההזמנה, מרכז המסמכים ב-Drive, שיחון ומספרי חירום</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openMovingModalTest()" class="px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-700 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm border border-rose-200">
+                            <i class="fa-solid fa-suitcase-rolling"></i> בדוק נוהל עזיבת מלון (טסט)
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Original Order Website Box -->
@@ -1506,105 +1535,6 @@
 
             </section>
 
-            <!-- TAB 7: INTERACTIVE PACKING LIST -->
-            <section id="tab-packing" class="tab-content hidden space-y-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-                    <div>
-                        <h3 class="text-2xl font-bold text-slate-900">צ'ק-ליסט אריזה אינטראקטיבי</h3>
-                        <p class="text-slate-500 text-sm">הוספנו עבורכם את הרשימה המלאה. כל פריט שתסמנו יישמר אוטומטית במכשיר.</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="resetPackingList()" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-semibold hover:bg-rose-50 hover:text-rose-600 transition">
-                            <i class="fa-solid fa-rotate-left ml-1"></i> איפוס סימונים
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Add Custom Item Input -->
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-2">
-                    <input type="text" id="custom-pack-item" placeholder="הוסיפו פריט משלכם לרשימה..." class="flex-grow bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-primary">
-                    <button onclick="addCustomPackingItem()" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary/90 transition flex-shrink-0">
-                        <i class="fa-solid fa-plus ml-1"></i> הוסף
-                    </button>
-                </div>
-
-                <!-- Categories Grid (Updated from Excel) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="packing-grid">
-                    
-                    <!-- Documents & Money -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-passport text-primary"></i> ניירת וכספים
-                        </h4>
-                        <div class="space-y-2.5 text-sm" id="pack-cat-docs">
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="flight-tix" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>כרטיסי טיסה</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="hotel-conf" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>פרטי מלונות, כתובות ואישורי הזמנה</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="insurance-docs" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>פרטי ביטוחים</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="licenses" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>רישיון נהיגה ישראלי + בינלאומי</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="credit-cards" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>כרטיס אשראי בינלאומי + קוד סודי</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="passports-copies" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>דרכונים + צילום דרכונים</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="prescriptions" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מרשמים לתרופות</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="cash-money" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מזומן - באט, דולר, אירו, ש"ח</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="doc-pouch" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>נרתיק מסמכים עמיד למים + פנקס ועט</span></label>
-                        </div>
-                    </div>
-
-                    <!-- Electronics -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-mobile-screen-button text-sand"></i> אלקטרוניקה
-                        </h4>
-                        <div class="space-y-2.5 text-sm" id="pack-cat-electronics">
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="phones-sim" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>טלפונים + סים / חבילת גלישה (לברר מול פלאפון)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="chargers" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מטענים + מתאם חשמל + מפצל</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="powerbanks" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מטענים ניידים / סוללות גיבוי</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="headphones" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>אוזניות לטיסה</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="tablets" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>טאבלטים</span></label>
-                        </div>
-                    </div>
-
-                    <!-- Clothing & Trip Gear -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-shirt text-tropical"></i> ביגוד וציוד לטיול
-                        </h4>
-                        <div class="space-y-2.5 text-sm" id="pack-cat-clothes">
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="day-backpack" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>תיק גב נוח ליום יום</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="light-clothes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>בגדים קלילים ונעימים (מנדפי זיעה)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="modest-clothes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>בגדים צנועים למקדשים (שרוולים, חצאית/מכנס ארוך)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="swimsuits" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>בגדי ים + בגדי חוף</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="walking-shoes" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>נעליים נוחות להליכה / ספורט</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="flipflops" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>כפכפים / סנדלים פתוחים נגד מים</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="sun-gear" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>כובע + משקפי שמש</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="rain-coat" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מעיל גשם דק / פונצ'ו</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="scarf" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>צעיף קל / שאל (למקדשים, טיסות ומזגנים)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="underwear" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>תחתונים, גרביים, חזיות</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="plastic-bags" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>שקיות ניילון לבגדים רטובים / כביסה</span></label>
-                        </div>
-                    </div>
-
-                    <!-- Hygiene & First Aid -->
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
-                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-kit-medical text-sunset"></i> היגיינה, עזרה ראשונה ולטיסה
-                        </h4>
-                        <div class="space-y-2.5 text-sm" id="pack-cat-med">
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="hygiene-products" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>פדים, טמפונים, מגבונים לחים, טישו</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="sunblock" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>קרם הגנה</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="dental-care" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מברשות ומשחות שיניים</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="shower-care" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>סבון נוזלי קטן, שמפו, מרכך, דאודורנט, בושם</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="towel" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>מגבת (קלה/מתייבשת מהר)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="mosquito-repellent" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>תכשיר נגד יתושים + ג'ל הרגעה לעקיצות (חשוב!)</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="laundry-soap" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>אבקת/טבליות כביסה לדרך</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="daily-meds" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>תרופות קבועות</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="first-aid" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>ערכת עזרה ראשונה (אנטיביוטיקה, משככי כאבים, סינטומיצין, פלסטרים, ורמוקס, זילרג'י וכו')</span></label>
-                            <label class="flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition"><input type="checkbox" onchange="savePackingState()" data-item="flight-sleep" class="pack-checkbox w-4 h-4 rounded text-primary focus:ring-primary"><span>לטיסה: כרית צוואר, כיסוי עיניים ואטמי אוזניים</span></label>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
         </div>
     </main>
 
@@ -1741,6 +1671,41 @@
             <div class="flex-grow bg-slate-100 relative">
                 <iframe id="preview-iframe" class="w-full h-full border-0" src=""></iframe>
             </div>
+        </div>
+    </div>
+
+    <!-- Moving Day Modal -->
+    <div id="moving-day-modal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-right shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-2 border-b border-rose-100">
+                <h4 class="text-lg font-black text-rose-600 flex items-center gap-2">
+                    <i class="fa-solid fa-suitcase-rolling"></i> נוהל מעבר מלון!
+                </h4>
+            </div>
+            <p class="text-sm text-slate-600 font-medium">
+                היום עוברים מלון! לפני שאתם סוגרים את החדר, ודאו שסימנתם V על הכל:
+            </p>
+            <div class="space-y-3 mt-4">
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-50 border border-slate-100 transition hover:bg-rose-50">
+                    <input type="checkbox" class="moving-cb w-5 h-5 rounded text-rose-500 focus:ring-rose-500" onchange="checkMovingProtocol()">
+                    <span class="text-sm font-bold text-slate-700">הכספת ריקה ונשארה פתוחה</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-50 border border-slate-100 transition hover:bg-rose-50">
+                    <input type="checkbox" class="moving-cb w-5 h-5 rounded text-rose-500 focus:ring-rose-500" onchange="checkMovingProtocol()">
+                    <span class="text-sm font-bold text-slate-700">כל המטענים נותקו מהשקעים</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-50 border border-slate-100 transition hover:bg-rose-50">
+                    <input type="checkbox" class="moving-cb w-5 h-5 rounded text-rose-500 focus:ring-rose-500" onchange="checkMovingProtocol()">
+                    <span class="text-sm font-bold text-slate-700">דרכונים בתיק האישי ולא במזוודה</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-slate-50 border border-slate-100 transition hover:bg-rose-50">
+                    <input type="checkbox" class="moving-cb w-5 h-5 rounded text-rose-500 focus:ring-rose-500" onchange="checkMovingProtocol()">
+                    <span class="text-sm font-bold text-slate-700">בדיקה מתחת למיטות ובמקלחת</span>
+                </label>
+            </div>
+            <button id="moving-confirm-btn" disabled class="w-full mt-4 px-4 py-3 bg-slate-300 text-slate-500 rounded-xl text-sm font-black transition cursor-not-allowed" onclick="closeMovingModal()">
+                אנחנו מוכנים לעזוב!
+            </button>
         </div>
     </div>
 
@@ -2452,12 +2417,53 @@
             document.getElementById('preview-iframe').src = '';
         }
 
+        // --- 11. Moving Day Logic ---
+        function checkMovingProtocol() {
+            const checkboxes = document.querySelectorAll('.moving-cb');
+            const btn = document.getElementById('moving-confirm-btn');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            
+            if (allChecked) {
+                btn.disabled = false;
+                btn.classList.remove('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btn.classList.add('bg-rose-600', 'text-white', 'hover:bg-rose-700', 'shadow-md');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+                btn.classList.remove('bg-rose-600', 'text-white', 'hover:bg-rose-700', 'shadow-md');
+            }
+        }
+
+        function closeMovingModal() {
+            document.getElementById('moving-day-modal').classList.add('hidden');
+            const today = new Date().toLocaleDateString('en-GB');
+            localStorage.setItem('thailand_moving_checked_' + today, 'true');
+        }
+
+        function openMovingModalTest() {
+            document.querySelectorAll('.moving-cb').forEach(cb => cb.checked = false);
+            checkMovingProtocol();
+            document.getElementById('moving-day-modal').classList.remove('hidden');
+        }
+
+        function checkTodayIsMovingDay() {
+            const todayStr = new Date().toLocaleDateString('en-GB'); 
+            const movingDays = ['27/09/2026', '02/10/2026', '10/10/2026'];
+            
+            if (movingDays.includes(todayStr)) {
+                if (!localStorage.getItem('thailand_moving_checked_' + todayStr)) {
+                    openMovingModalTest();
+                }
+            }
+        }
+
         // Initialize on load
         window.addEventListener('DOMContentLoaded', () => {
             renderFavoritesUI();
             loadPackingState();
             updateProfileUI();
             fetchDriveFiles();
+            checkTodayIsMovingDay();
         });
     </script>
 </body>
