@@ -76,11 +76,14 @@
                 <button onclick="switchTab('map')" class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="map">
                     <i class="fa-solid fa-map-location-dot ml-1.5"></i> מפה
                 </button>
+                <button onclick="switchTab('tips')" class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="tips">
+                    <i class="fa-solid fa-lightbulb ml-1.5"></i> 7/11 וטיפים
+                </button>
                 <button onclick="switchTab('tools')" class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="tools">
                     <i class="fa-solid fa-briefcase ml-1.5"></i> כלים
                 </button>
                 <button onclick="switchTab('packing')" class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium transition text-slate-300 hover:text-white" data-tab="packing">
-                    <i class="fa-solid fa-list-check ml-1.5"></i> צ'ק ליסט
+                    <i class="fa-solid fa-list-check ml-1.5"></i> אריזה
                 </button>
             </nav>
 
@@ -1087,11 +1090,168 @@
                 </div>
             </section>
 
-            <!-- TAB 5: TOOLS & EMERGENCY -->
+            <!-- TAB 5: TIPS & 7-ELEVEN (NEW) -->
+            <section id="tab-tips" class="tab-content hidden space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">טיפים לדרך ומוצרי 7-Eleven</h3>
+                        <p class="text-slate-500 text-sm">ההמלצות הכי חמות, תרופות מקומיות, נשנושים ואזהרות למטייל</p>
+                    </div>
+                </div>
+
+                <!-- 7-Eleven Essentials -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-6 border border-emerald-100 shadow-sm">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-2 text-lg border-b border-emerald-200 pb-3 mb-4">
+                        <i class="fa-solid fa-store text-emerald-500"></i> חובה בסל: מה קונים ב-7-Eleven?
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1584308666744-24d5e4702cf0?q=80&w=600&auto=format&fit=crop" alt="Pills" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">הארנב המעופף (Flying Rabbit)</h5>
+                            <p class="text-xs text-slate-600">תרופת הקסם המקומית המפורסמת ביותר לכאבי בטן, גזים, בחילות וקלקולי קיבה מהאוכל המקומי. בקבוק לבן קטן עם ציור של ארנב. חובה!</p>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=600&auto=format&fit=crop" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">סוכריות G'nite</h5>
+                            <p class="text-xs text-slate-600">סוכריות גומי טבעיות (בצבע סגול/ורוד) שעוזרות להירדם בקלות. הפתרון המושלם והטעים להתגברות על הג'ט-לג בימים הראשונים.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1546483875-ad9014c88eba?q=80&w=600&auto=format&fit=crop" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">אלקטרוניטים (Royal D)</h5>
+                            <p class="text-xs text-slate-600">החום בתאילנד מייבש. אבקת Royal-D נמכרת בשקיות קטנות – מערבבים עם בקבוק מים וזה מחזיר לגוף מלחים, מינרלים ואנרגיה באופן מיידי.</p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1629198725916-a19e59d95f85?q=80&w=600&auto=format&fit=crop" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">הגנה מיתושים (Soffell)</h5>
+                            <p class="text-xs text-slate-600">תרסיס הדוחה יתושים המוביל בתאילנד. הטיפ המנצח: מורחים קודם קרם הגנה, מחכים 15 דקות, ורק אז מרססים את הסופל מעל.</p>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1600718374662-0483d2b9da44?q=80&w=600&auto=format&fit=crop" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">מדריך המים המינרליים</h5>
+                            <p class="text-xs text-slate-600"><strong>לספורט (מינרלים):</strong> Minéré / Purra. <br><strong>ליום-יום (ניטרלי):</strong> Aura / Crystal / Singha.<br><strong>לקפה/תה:</strong> Mont Fleur.</p>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
+                            <img src="https://images.unsplash.com/photo-1461023058943-0708e5215cbd?q=80&w=600&auto=format&fit=crop" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <h5 class="font-bold text-sm text-slate-800 mb-1">קומבואים של שייקים ב-7/11</h5>
+                            <p class="text-xs text-slate-600">קנו כוס קרח וערבבו: קפה שחור + חלב בננה ושוקו. או לחלופין: פחית אספרסו קרה + בקבוק חלב טרי קטן. יוצא קפה קר מדהים בגרושים.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food, Fruits & Culture -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Fruits -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+                        <h4 class="font-bold text-rose-600 flex items-center gap-2 text-base border-b border-slate-100 pb-3 mb-4">
+                            <i class="fa-solid fa-apple-whole"></i> פירות טרופיים שחובה לטעום
+                        </h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="text-2xl mt-1">💜</span>
+                                <div>
+                                    <strong class="text-slate-800 text-sm block">מנגוסטין (Mangosteen)</strong>
+                                    <span class="text-xs text-slate-500">"מלכת הפירות". קליפה סגולה כהה, ובפנים פלחים לבנים, מתוקים-חמצמצים, עסיסיים ונמסים בפה.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-2xl mt-1">🔴</span>
+                                <div>
+                                    <strong class="text-slate-800 text-sm block">רמבוטן (Rambutan)</strong>
+                                    <span class="text-xs text-slate-500">נראה כמו קיפוד אדום קטן. מקלפים אותו ומקבלים פרי שקוף, מתוק ומרענן מאוד (מזכיר ליצ'י).</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-2xl mt-1">🐉</span>
+                                <div>
+                                    <strong class="text-slate-800 text-sm block">פרי הדרקון (Dragon Fruit)</strong>
+                                    <span class="text-xs text-slate-500">הפרי הכי פוטוגני שיש. ורוד מבחוץ, לבן/סגול עם נקודות שחורות מבפנים. טעם עדין, קליל ומרענן.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-2xl mt-1">🤢</span>
+                                <div>
+                                    <strong class="text-slate-800 text-sm block">דוריאן (Durian) - לאמיצים!</strong>
+                                    <span class="text-xs text-slate-500">"מלך הפירות". ידוע בריח החריף והמסריח שלו (אסור להכניס אותו למלונות!), אבל בפנים יש לו מרקם עשיר וקרמי במיוחד.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Dos and Donts -->
+                    <div class="bg-rose-50 rounded-3xl p-6 border border-rose-100 shadow-sm">
+                        <h4 class="font-bold text-rose-900 flex items-center gap-2 text-base border-b border-rose-200 pb-3 mb-4">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> אזהרות, הונאות ו"אל תעשה"
+                        </h4>
+                        <ul class="space-y-3 text-xs text-rose-800">
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>מה אסור להוציא מהמדינה?</strong> אלמוגים, צדפים, פירות טריים, ופסלי בודהה גדולים. כמו כן חל איסור מוחלט על הוצאת קנאביס/סמים (גם אם נקנו חוקית בתאילנד!).</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>זיופים:</strong> הימנעו מלקנות כמות מסחרית של מותגים מזויפים. המכס בודק מעל 5 פריטים זהים.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>הונאת הטוק-טוק:</strong> נהג שמציע נסיעה ב-20 באט לאתרים מרכזיים, לרוב ייקח אתכם קודם ל"סיבוב" בחנויות תכשיטים או חליפות כדי לגזור קופון. סכמו מחיר ויעד מראש.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>"הארמון סגור היום":</strong> אל תאמינו לאדם ברחוב שאומר לכם שהאטרקציה שאליה אתם הולכים סגורה. זו שיטה לנתב אתכם לסיור יקר שהוא מוכר.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>סיגריות אלקטרוניות:</strong> אסורות לחלוטין בתאילנד על פי חוק.</li>
+                            <li class="flex gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-0.5"></i> <strong>כבוד תרבותי:</strong> לעולם אל תצביעו עם הרגליים לעבר אדם או בודהה (נחשב לאיבר הנחות ביותר), והימנעו מלגעת בראש של אדם אחר (האיבר המקודש ביותר).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fun Checklist -->
+                <div class="bg-slate-900 rounded-3xl p-8 text-white shadow-xl text-center relative overflow-hidden">
+                    <i class="fa-solid fa-plane-arrival absolute -right-4 -bottom-4 text-8xl text-white/5 rotate-[-20deg]"></i>
+                    <h4 class="text-xl font-black text-amber-400 mb-6">איך לדעת שבאמת הייתם בתאילנד? ✔️</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-right">
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לשתות מנגו שייק קר כקרח</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לשרוף את הפה עם פאד-קפאו "חריף בקטנה"</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לעשות מסאז' רגליים בזמן שיורד גשם בחוץ</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לאכול מנגו סטיקי רייס מושלם מדוכן רחוב</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>להיכנס ל-7/11 "רק בשביל מים" ולצאת עם שקית מפוצצת</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לנסוע בטוק-טוק צבעוני עם מוזיקה בפול ווליום</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>להגיד "קופ קון קאפ/קא" למלצר ולקבל חיוך</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer hover:text-amber-300 transition">
+                            <input type="checkbox" class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-none bg-white/20">
+                            <span>לראות לטאת כוח ענקית ברחוב ולהעמיד פנים שזה רגיל</span>
+                        </label>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TAB 6: TOOLS & EMERGENCY -->
             <section id="tab-tools" class="tab-content hidden space-y-8">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900">כלים, מידע שימושי ומרכז חירום</h3>
-                    <p class="text-slate-500 text-sm">אתר ההזמנה, מרכז המסמכים ב-Drive, המלצות למוצרי חובה, ומספרי חירום</p>
+                    <p class="text-slate-500 text-sm">אתר ההזמנה, מרכז המסמכים ב-Drive, שיחון ומספרי חירום</p>
                 </div>
 
                 <!-- Original Order Website Box -->
@@ -1110,132 +1270,49 @@
                     </button>
                 </div>
 
-                <!-- NEW: Emergency Contacts & Phrasebook Combined Grid -->
-                <div class="space-y-6">
-                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-                        <h4 class="font-bold text-slate-900 border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-phone-volume text-sunset"></i> מספרי חירום וטלפונים חשובים
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Expanded Thai Phrasebook -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-bold text-primary flex items-center gap-2 text-base border-b border-slate-100 pb-3 mb-2">
+                            <i class="fa-solid fa-language"></i> שיחון תאי - מילים ומשפטים
                         </h4>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                            <!-- Lametayel -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-rose-50 border border-rose-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">המרכז למטייל תאילנד</span>
-                                    <span class="text-xs text-slate-500">שירות לקוחות בעברית</span>
+                        <div class="space-y-4 text-sm text-slate-700">
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-1 text-xs">ברכות ונימוסים</h5>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>שלום / היי:</strong> סוואדי קראפ/קא</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>תודה רבה:</strong> קופ קון קראפ/קא</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>סליחה / אקסקיוב מי:</strong> קו טוד קראפ/קא</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>מה שלומך?:</strong> סבאי די מאי?</div>
                                 </div>
-                                <a href="tel:*8880" class="px-3 py-1.5 bg-rose-600 text-white rounded-xl text-xs font-bold hover:bg-rose-700 transition">8880*</a>
                             </div>
-                            <!-- Chabad Phuket -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-blue-50 border border-blue-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">בית חב"ד פוקט</span>
-                                    <span class="text-xs text-slate-500">עזרה, ארוחות ואוזן קשבת</span>
+                            
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-1 text-xs">במסעדה ובאוכל</h5>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-rose-50 text-rose-700 p-2 rounded-lg border border-rose-100"><strong>לא חריף בכלל!:</strong> מאי פֶט (Mai Phet)</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>טעים מאוד:</strong> ארוי מאק (Aroy Mak)</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>החשבון בבקשה:</strong> צֶ'ק בּיל (Check Bin)</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>מים:</strong> נָאם (Nam)</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>קצת חריף:</strong> פט ניט נוי</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>בלי סוכר:</strong> מאי סאי נאם טאן</div>
                                 </div>
-                                <a href="tel:+66887568206" class="px-3 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition">חיוג</a>
                             </div>
-                            <!-- Tourist Police -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">משטרת התיירים</span>
-                                    <span class="text-xs text-slate-500">מענה באנגלית 24/7</span>
+
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-1 text-xs">קניות והתמצאות</h5>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>כמה זה עולה?:</strong> טאו ראי?</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>יקר מאוד:</strong> פנג מאק!</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>אפשר הנחה?:</strong> לוט דאי מאי?</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>איפה השירותים?:</strong> הונג נאם יו תאי?</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>אין בעיה/הכל טוב:</strong> מאי פן ראי</div>
+                                    <div class="bg-slate-50 p-2 rounded-lg"><strong>עזור לי!:</strong> צ'ואי דואי!</div>
                                 </div>
-                                <a href="tel:1155" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1155</a>
-                            </div>
-                            <!-- Police General -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">משטרה (כללי)</span>
-                                    <span class="text-xs text-slate-500">מוקד חירום משטרתי</span>
-                                </div>
-                                <a href="tel:191" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">191</a>
-                            </div>
-                            <!-- Ambulance -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">אמבולנס וחירום רפואי</span>
-                                    <span class="text-xs text-slate-500">מוקד ארצי תאילנד</span>
-                                </div>
-                                <a href="tel:1669" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1669</a>
-                            </div>
-                            <!-- Bangkok Hospital -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">Bangkok Hospital</span>
-                                    <span class="text-xs text-slate-500">רפואה פרטית ובינלאומית</span>
-                                </div>
-                                <a href="tel:1719" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1719</a>
-                            </div>
-                            <!-- Embassy -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">שגרירות ישראל בבנגקוק</span>
-                                    <span class="text-xs text-slate-500">חירום קונסולרי</span>
-                                </div>
-                                <a href="tel:+6622049200" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">חיוג</a>
-                            </div>
-                            <!-- Fire -->
-                            <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
-                                <div>
-                                    <span class="font-bold text-slate-900 block">מכבי אש</span>
-                                    <span class="text-xs text-slate-500">מוקד כיבוי והצלה</span>
-                                </div>
-                                <a href="tel:199" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">199</a>
                             </div>
                         </div>
-
-                        <h4 class="font-bold text-slate-900 border-b border-slate-100 pb-3 mt-6 mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-language text-primary"></i> שיחון תאי שימושי
-                        </h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                                <span class="text-slate-400 block text-[10px]">שלום / היי</span>
-                                <span class="font-bold text-slate-900 text-sm">סוואדי קראפ / קא</span>
-                            </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                                <span class="text-slate-400 block text-[10px]">תודה רבה</span>
-                                <span class="font-bold text-slate-900 text-sm">קופ קון קראפ / קא</span>
-                            </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                                <span class="text-slate-400 block text-[10px]">לא חריף!</span>
-                                <span class="font-bold text-sunset text-sm">מאי פֶט</span>
-                            </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                                <span class="text-slate-400 block text-[10px]">טעים מאוד</span>
-                                <span class="font-bold text-slate-900 text-sm">ארוי מאק</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- ================= המלצות זהב (מוצרי 7-Eleven וכו') ================= -->
-                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-6 border border-emerald-100 shadow-sm space-y-4">
-                        <h4 class="font-bold text-emerald-900 flex items-center gap-2 text-base border-b border-emerald-200 pb-3">
-                            <i class="fa-solid fa-star text-amber-400"></i> המלצות זהב: מה לקנות ב-7-Eleven?
-                        </h4>
-                        <ul class="text-xs text-slate-700 space-y-3">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-moon text-indigo-500 mt-0.5"></i>
-                                <div><strong>סוכריות G'nite:</strong> סוכריות גומי טבעיות שעוזרות להירדם בקלות ומושלמות להתגברות על הג'ט לג בימים הראשונים.</div>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-capsules text-rose-500 mt-0.5"></i>
-                                <div><strong>הארנב המעופף (Flying Rabbit):</strong> תרופת הקסם המקומית לכאבי בטן, גזים וקלקולי קיבה מהאוכל המקומי.</div>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-bolt text-amber-500 mt-0.5"></i>
-                                <div><strong>אבקת Royal D:</strong> אלקטרוליטים למניעת התייבשות מהחום הכבד. מערבבים במים ושותים כדי להחזיר מלחים.</div>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-bottle-water text-primary mt-0.5"></i>
-                                <div><strong>איזה מים לקנות?</strong><br> לספורט והזעה: Minéré / Purra (מלאים במינרלים). ליום-יום: Aura / Crystal / Singha.</div>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-mug-hot text-orange-800 mt-0.5"></i>
-                                <div><strong>שילובים שווים להכנה:</strong> קפה שחור + חלב בננה ושוקו. או פחית אספרסו + חלב טרי עם קרח.</div>
-                            </li>
-                        </ul>
                     </div>
 
                     <!-- Currency Converter Tool -->
@@ -1337,9 +1414,75 @@
                     </div>
                 </div>
 
+                <!-- Emergency Contacts -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+                    <h4 class="font-bold text-slate-900 border-b border-slate-100 pb-3 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-phone-volume text-sunset"></i> מספרי חירום וטלפונים חשובים
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-rose-50 border border-rose-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">המרכז למטייל תאילנד</span>
+                                <span class="text-xs text-slate-500">שירות לקוחות בעברית</span>
+                            </div>
+                            <a href="tel:*8880" class="px-3 py-1.5 bg-rose-600 text-white rounded-xl text-xs font-bold hover:bg-rose-700 transition">8880*</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-blue-50 border border-blue-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">בית חב"ד פוקט</span>
+                                <span class="text-xs text-slate-500">עזרה, ארוחות ואוזן קשבת</span>
+                            </div>
+                            <a href="tel:+66887568206" class="px-3 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 transition">חיוג</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">משטרת התיירים</span>
+                                <span class="text-xs text-slate-500">מענה באנגלית 24/7</span>
+                            </div>
+                            <a href="tel:1155" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1155</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">משטרה (כללי)</span>
+                                <span class="text-xs text-slate-500">מוקד חירום משטרתי</span>
+                            </div>
+                            <a href="tel:191" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">191</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">אמבולנס וחירום רפואי</span>
+                                <span class="text-xs text-slate-500">מוקד ארצי תאילנד</span>
+                            </div>
+                            <a href="tel:1669" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1669</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">Bangkok Hospital</span>
+                                <span class="text-xs text-slate-500">רפואה פרטית ובינלאומית</span>
+                            </div>
+                            <a href="tel:1719" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">1719</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">שגרירות ישראל בבנגקוק</span>
+                                <span class="text-xs text-slate-500">חירום קונסולרי</span>
+                            </div>
+                            <a href="tel:+6622049200" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">חיוג</a>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div>
+                                <span class="font-bold text-slate-900 block">מכבי אש</span>
+                                <span class="text-xs text-slate-500">מוקד כיבוי והצלה</span>
+                            </div>
+                            <a href="tel:199" class="px-3 py-1.5 bg-slate-800 text-white rounded-xl text-xs font-bold hover:bg-slate-900 transition">199</a>
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
-            <!-- TAB 6: INTERACTIVE PACKING LIST -->
+            <!-- TAB 7: INTERACTIVE PACKING LIST -->
             <section id="tab-packing" class="tab-content hidden space-y-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                     <div>
@@ -1458,6 +1601,10 @@
         <button onclick="switchTab('map')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn min-w-[60px]" data-tab="map">
             <i class="fa-solid fa-map-location-dot text-base"></i>
             <span>מפה</span>
+        </button>
+        <button onclick="switchTab('tips')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn min-w-[60px]" data-tab="tips">
+            <i class="fa-solid fa-lightbulb text-base"></i>
+            <span>טיפים</span>
         </button>
         <button onclick="switchTab('tools')" class="flex flex-col items-center gap-1 p-1 mobile-nav-btn min-w-[60px]" data-tab="tools">
             <i class="fa-solid fa-briefcase text-base"></i>
