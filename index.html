@@ -581,7 +581,7 @@
                     </div>
                     <div class="p-6 space-y-6">
                         <div class="bg-amber-50/50 p-4 rounded-2xl border border-amber-100">
-                            <h5 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-bed text-amber-50 ml-1"></i> פרטי ההזמנה וחלוקת חדרים:</h5>
+                            <h5 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-bed text-amber-500 ml-1"></i> פרטי ההזמנה וחלוקת חדרים:</h5>
                             <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside px-2">
                                 <li><strong>סוג חדר:</strong> Guest room, Pool view 41sqm.</li>
                                 <li>כולל תוספת תשלום עבור הבטחת חדרים מקושרים (Surcharge connecting).</li>
@@ -762,7 +762,7 @@
                     <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="phang-nga-vip">
                         <div class="h-44 bg-slate-800 relative">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWlUWWoJT9xlzSWGtfrhM5rUJ89STyUOY6iLvTmi_DjBIPuPav-MeKk1LG&s=10" class="w-full h-full object-cover" alt="Mantra Spa">
-                            <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">VIP • פוקט</span>
+                            <span class="absolute top-3 right-3 bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold px-2.5 py-1 rounded-lg">VIP • פוקט</span>
                             <button onclick="toggleFavorite('phang-nga-vip')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
                                 <i class="fa-regular fa-heart"></i>
                             </button>
@@ -1040,9 +1040,9 @@
                     </button>
                 </div>
 
-                <div class="bg-white rounded-3xl p-2 border border-slate-200 shadow-sm h-[400px] relative overflow-hidden">
-                    <!-- General map centered on Southern Thailand -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1000000!2d98.39!3d8.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sil!4v1700000000000" width="100%" height="100%" style="border:0; border-radius: 1.25rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="bg-white rounded-3xl p-2 border border-slate-200 shadow-sm h-[500px] relative overflow-hidden">
+                    <!-- שים לב: כאן אתה צריך להדביק את הקישור למפה האישית שיצרת ב-My Maps -->
+                    <iframe src="https://www.google.com/maps/d/embed?mid=החלף_אותי_בקישור_שלך" width="100%" height="100%" style="border:0; border-radius: 1.25rem;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1108,71 +1108,75 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Card 1 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh7asGCRl6C4Xi1QFVEgWvHvi21cWX5xmgFCiSKwOBNFrtYUUgRAZRArNt&s=10" alt="Pills" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh7asGCRl6C4Xi1QFVEgWvHvi21cWX5xmgFCiSKwOBNFrtYUUgRAZRArNt&s=10" alt="Pills" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">הארנב המעופף (Flying Rabbit)</h5>
                             <p class="text-xs text-slate-600">תרופת הקסם המקומית המפורסמת ביותר לכאבי בטן, גזים, בחילות וקלקולי קיבה מהאוכל המקומי. בקבוק לבן קטן עם ציור של ארנב. חובה!</p>
                         </div>
                         
                         <!-- Card 2 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUE8uP_9Fa2U1a-jx6vpc4gduzJNLbuMO9Ekn7-WfXgbn8cR0LcUqb1oo&s=10" alt="G'nite" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUE8uP_9Fa2U1a-jx6vpc4gduzJNLbuMO9Ekn7-WfXgbn8cR0LcUqb1oo&s=10" alt="G'nite" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">סוכריות G'nite</h5>
                             <p class="text-xs text-slate-600">סוכריות גומי טבעיות (בצבע סגול/ורוד) שעוזרות להירדם בקלות. הפתרון המושלם והטעים להתגברות על הג'ט-לג בימים הראשונים.</p>
                         </div>
 
                         <!-- Card 3 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://www.711thaisnacks.com/wp-content/uploads/2026/02/royal-d-electrolyte-sachet-7-eleven.jpg.webp" alt="Royal D" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://www.711thaisnacks.com/wp-content/uploads/2026/02/royal-d-electrolyte-sachet-7-eleven.jpg.webp" alt="Royal D" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">אלקטרוניטים (Royal D)</h5>
                             <p class="text-xs text-slate-600">החום בתאילנד מייבש. אבקת Royal-D נמכרת בשקיות קטנות – מערבבים עם בקבוק מים וזה מחזיר לגוף מלחים, מינרלים ואנרגיה באופן מיידי.</p>
                         </div>
 
                         <!-- Card 4 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://www.711thaisnacks.com/wp-content/uploads/2026/03/best-7-eleven-mosquito-sprays-thailand.jpg.webp" alt="Soffell" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://www.711thaisnacks.com/wp-content/uploads/2026/03/best-7-eleven-mosquito-sprays-thailand.jpg.webp" alt="Soffell" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">הגנה מיתושים (Soffell)</h5>
                             <p class="text-xs text-slate-600">תרסיס הדוחה יתושים המוביל בתאילנד. הטיפ המנצח: מורחים קודם קרם הגנה, מחכים 15 דקות, ורק אז מרססים את הסופל מעל.</p>
                         </div>
 
                         <!-- Card 5 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://i0.wp.com/givemethisday.com/wp-content/uploads/2021/04/5F7E9FEA-1AAA-4DF2-9148-3079A241417E_1_201_a.jpeg?fit=1200%2C900&ssl=1" alt="Mineral Water" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://i0.wp.com/givemethisday.com/wp-content/uploads/2021/04/5F7E9FEA-1AAA-4DF2-9148-3079A241417E_1_201_a.jpeg?fit=1200%2C900&ssl=1" alt="Mineral Water" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">מדריך המים המינרליים</h5>
                             <p class="text-xs text-slate-600"><strong>לספורט (מינרלים):</strong> Minéré / Purra. <br><strong>ליום-יום (ניטרלי):</strong> Aura / Crystal / Singha.<br><strong>לקפה/תה:</strong> Mont Fleur.</p>
                         </div>
 
                         <!-- Card 6 -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://www.c-store.com.au/wp-content/uploads/2022/11/SmoothiesRange1A7ELE0377RGB.jpg" alt="Smoothies" class="w-full h-32 object-cover rounded-xl mb-3">
+                            <img src="https://www.c-store.com.au/wp-content/uploads/2022/11/SmoothiesRange1A7ELE0377RGB.jpg" alt="Smoothies" class="w-full h-auto object-cover rounded-xl mb-3">
                             <h5 class="font-bold text-sm text-slate-800 mb-1">שייקים ומשקאות קרח</h5>
                             <p class="text-xs text-slate-600">בסניפים רבים תמצאו מכונות סלרפי או אזורי All-Cafe להכנת שייקים טריים ומרעננים במחירים מצחיקים.</p>
-                        </div>
-                        
-                        <!-- Card 7 -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://drive.google.com/uc?id=1tB1mZD_og3dSz-ACjeBhuY_sCYF_3_u6" alt="Drink Mixes" class="w-full h-32 object-cover rounded-xl mb-3">
-                            <h5 class="font-bold text-sm text-slate-800 mb-1">מיקסים סודיים: קפה וקרם</h5>
-                            <p class="text-xs text-slate-600">מומלץ: קנו כוס קרח וערבבו פחית קפה שחור עם בקבוק חלב בננה ושוקו. שילובים מטורפים שעולים גרושים ומרעננים את היום.</p>
-                        </div>
-
-                        <!-- Card 8 -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://drive.google.com/uc?id=1nKOBvzdeghtPpRnrjyQ-JTeL0-MTSWNj" alt="Fruit Mixes" class="w-full h-32 object-cover rounded-xl mb-3">
-                            <h5 class="font-bold text-sm text-slate-800 mb-1">מיקסים סודיים: סודה ופירות</h5>
-                            <p class="text-xs text-slate-600">שלבו משקאות ויטמינים צבעוניים או מיץ פירות עם סודה מקומית לקבלת משקה תוסס, פוטוגני וטעים בטירוף.</p>
-                        </div>
-
-                        <!-- Card 9 -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm border border-emerald-50/50 hover:shadow-md transition">
-                            <img src="https://drive.google.com/uc?id=15stLLt5sMzMbcTNH-tmCndQ7Qcb9ee_T" alt="Medical/Pharmacy" class="w-full h-32 object-cover rounded-xl mb-3">
-                            <h5 class="font-bold text-sm text-slate-800 mb-1">מוצרי עזרה ראשונה חובה</h5>
-                            <p class="text-xs text-slate-600">כדורי פחם (Ca-R-Bon) לכאבי בטן חזקים, משחות שרירים (Tiger Balm), משאפי פוי-סיאן (Poy-Sian) לצינון, ופלסטרים מקררים (Kool Fever).</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- NEW: Photo Guides -->
+                <div class="space-y-6 mt-8">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-2 text-xl border-b border-emerald-200 pb-3">
+                        <i class="fa-solid fa-image"></i> מדריכים מצולמים
+                    </h4>
+                    
+                    <!-- Guide 1 -->
+                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-emerald-100">
+                        <h5 class="font-bold text-lg text-slate-800 mb-3 text-center">מיקסים סודיים: קפה וקרם</h5>
+                        <img src="https://lh3.googleusercontent.com/d/1tB1mZD_og3dSz-ACjeBhuY_sCYF_3_u6" alt="Drink Mixes" class="w-full h-auto rounded-xl">
+                    </div>
+
+                    <!-- Guide 2 -->
+                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-emerald-100">
+                        <h5 class="font-bold text-lg text-slate-800 mb-3 text-center">מיקסים סודיים: סודה ופירות</h5>
+                        <img src="https://lh3.googleusercontent.com/d/1nKOBvzdeghtPpRnrjyQ-JTeL0-MTSWNj" alt="Fruit Mixes" class="w-full h-auto rounded-xl">
+                    </div>
+
+                    <!-- Guide 3 -->
+                    <div class="bg-white rounded-3xl p-4 shadow-sm border border-emerald-100">
+                        <h5 class="font-bold text-lg text-slate-800 mb-3 text-center">מוצרי עזרה ראשונה חובה</h5>
+                        <img src="https://lh3.googleusercontent.com/d/15stLLt5sMzMbcTNH-tmCndQ7Qcb9ee_T" alt="Medical/Pharmacy" class="w-full h-auto rounded-xl">
+                    </div>
+                </div>
+
                 <!-- Food, Fruits & Culture -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                     <!-- Fruits -->
                     <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
                         <h4 class="font-bold text-rose-600 flex items-center gap-2 text-base border-b border-slate-100 pb-3 mb-4">
@@ -1227,7 +1231,7 @@
                 </div>
 
                 <!-- Fun Checklist -->
-                <div class="bg-slate-900 rounded-3xl p-8 text-white shadow-xl text-center relative overflow-hidden">
+                <div class="bg-slate-900 rounded-3xl p-8 text-white shadow-xl text-center relative overflow-hidden mt-8">
                     <i class="fa-solid fa-plane-arrival absolute -right-4 -bottom-4 text-8xl text-white/5 rotate-[-20deg]"></i>
                     <h4 class="text-xl font-black text-amber-400 mb-6">איך לדעת שבאמת הייתם בתאילנד? ✔️</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-right">
