@@ -827,7 +827,7 @@
 
                     <div class="attr-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" data-region="phuket" data-id="hanuman-world">
                         <div class="h-44 bg-slate-800 relative">
-                            <img src="https://img.avianexperiences.com/attractions/82ff880e-535b-4e53-a039-733862a79b3d" class="w-full h-full object-cover" alt="Hanuman World">
+                            <img src="https://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/o4k9x0jyhxveqkbeqrui.jpg" class="w-full h-full object-cover" alt="Hanuman World">
                             <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-lg">פוקט</span>
                             <button onclick="toggleFavorite('hanuman-world')" class="fav-btn absolute top-3 left-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-rose-500 transition">
                                 <i class="fa-regular fa-heart"></i>
@@ -1307,20 +1307,39 @@
                     </div>
                 </div>
 
-                <!-- Original Order Website Box -->
-                <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent rounded-3xl p-6 border border-amber-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 rounded-md bg-amber-500 text-white font-black text-xs">הזמנה מאומתת</span>
-                            <h4 class="font-bold text-slate-900 text-base">אתר ההזמנה המקורי (המרכז למטייל)</h4>
+                <!-- Essential Links Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Order Website Box -->
+                    <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent rounded-3xl p-6 border border-amber-200 shadow-sm flex flex-col justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-amber-500 text-white font-black text-xs">הזמנה מאומתת</span>
+                                <h4 class="font-bold text-slate-900 text-base">אתר ההזמנה (המרכז למטייל)</h4>
+                            </div>
+                            <p class="text-xs text-slate-600">
+                                מעבר מהיר לעמוד השובר המקורי. בלחיצה הסיסמה (<b>0506210255</b>) תועתק אוטומטית ללוח.
+                            </p>
                         </div>
-                        <p class="text-xs text-slate-600">
-                            מעבר מהיר לעמוד השובר המקורי של איליה / המרכז למטייל. בלחיצה הסיסמה (<b>0506210255</b>) תועתק אוטומטית ללוח.
-                        </p>
+                        <button onclick="openOrderSite()" class="self-start px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm whitespace-nowrap">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> פתח אתר הזמנה
+                        </button>
                     </div>
-                    <button onclick="openOrderSite()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm whitespace-nowrap">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> פתח אתר הזמנה
-                    </button>
+
+                    <!-- TDAC Website Box -->
+                    <div class="bg-gradient-to-r from-blue-500/10 via-blue-500/5 to-transparent rounded-3xl p-6 border border-blue-200 shadow-sm flex flex-col justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-blue-500 text-white font-black text-xs">חובה לפני הטיסה</span>
+                                <h4 class="font-bold text-slate-900 text-base">כרטיס כניסה דיגיטלי (TDAC)</h4>
+                            </div>
+                            <p class="text-xs text-slate-600">
+                                טופס הצהרת ההגירה לתאילנד. חובה למלא עד <b>3 ימים</b> לפני הטיסה כדי לקבל אישור כניסה (QR Code) למדינה.
+                            </p>
+                        </div>
+                        <a href="https://tdac.immigration.go.th/arrival-card/#/home" target="_blank" class="self-start px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm whitespace-nowrap w-fit">
+                            <i class="fa-solid fa-passport"></i> למילוי הטופס הרשמי
+                        </a>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
